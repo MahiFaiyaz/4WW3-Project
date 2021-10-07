@@ -1,3 +1,5 @@
+/* Adds background image */
+
 .main {
     background-image: url(images/library-bg.webp); 
     height: 100%; 
@@ -6,28 +8,24 @@
     background-repeat: repeat-y 
 }
 
-.results {
-    background-image: url(images/library-bg.webp); 
-    height: 100%; 
-    background-position: center; 
-    background-size: cover; 
-    background-repeat: repeat-y;
-
-}
-
+/* Sets height of body to 100% */
 html, body {
     height: 100%;
 }
 
+/* Id container has a mininumum height of 100%,
+necessary for creating a footer that stayed at the bottom of the page at all times */
 #container {
     min-height: 100%;
 }
 
+/* Padding bottom is the size of the footer */
 #main {
     overflow: auto;
     padding-bottom: 47px;
 }
 
+/* Sets the height of the footer, and negative margin so it does not go off page */
 #footer {
     background-color: rgba(0, 0, 0, 0.699);
     position: relative;
@@ -36,6 +34,7 @@ html, body {
     clear: both;
 }
 
+/* used for centering video on individual_sample.html page */
 .center{
     margin-left: auto;
     margin-right: auto;
