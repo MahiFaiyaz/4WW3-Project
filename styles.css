@@ -35,7 +35,7 @@ necessary for creating a footer that stayed at the bottom of the page at all tim
 }
 
 /* used for centering video on individual_sample.html page */
-.center{
+.center_video{
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 5rem;
