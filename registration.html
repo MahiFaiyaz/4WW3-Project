@@ -1,0 +1,67 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">    
+    <link href="styles.css" rel="stylesheet">
+    <title>Register</title>
+</head>
+<body class="main">
+    <nav class="navbar navbar-light navbar-expand-md bg-light sticky-top mb-5">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link text-center text-dark h5" href="search.html">Home</a>
+                <a class="nav-item nav-link text-center text-dark h5" href="submission.html">Submit</a>
+                <a class="nav-item nav-link text-center text-light h5 rounded-pill bg-dark" href="registration.html">Register</a>
+            </div>
+        </div>
+    </nav>       
+    <h1 class="display-2 text-dark bg-light text-center col-12 col-md-6 mx-auto rounded-pill pb-3">
+        Register
+    </h1>
+    <div class="container-fluid bg-light p-3 rounded col-12 col-md-6 mx-auto position-absolute mt-5 start-50 top-50 translate-middle">
+        <form action="#">
+            <label for="firstName" class="form-label">First Name</label>
+            <input type="text" id="firstName" class="form-control mb-3" placeholder="First name"/>
+            <label for="lastName" class="form-label">Last Name</label>
+            <input type="text" id="lastName" class="form-control mb-3" placeholder="Last name"/>
+            <label class="form-label">Gender</label>
+            <div class="container">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="gender" value="1" id="male">
+                    <label class="form-check-label" for="male">Male</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="gender" value="2" id="female">
+                    <label class="form-check-label" for="female">Female</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="gender" value="3" id="other">
+                    <label class="form-check-label" for="other">Other</label>
+                </div>
+            </div>
+            <label for="userEmail" class="form-label mt-3">Email Address</label>
+            <input type="email" id="userEmail" class="form-control mb-3" placeholder="name@example.com"/>
+            <label for="userPassword" class="form-label">Password</label>
+            <input type="password" id="userPassword" class="form-control mb-3" placeholder="Password"/>
+            <label for="userBday" class="form-label">Date of Birth</label>
+            <input type="date" id="userBday" class="form-control mb-3"/>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="termsAndService">
+                <label class="form-check-label" for="defaultCheck1">Agree to terms and services</label>
+            </div>
+
+
+
+
+            <button type="submit" class="btn btn-light btn-outline-dark mt-4">Register</button>
+        </form>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
