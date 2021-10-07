@@ -5,3 +5,12 @@
     background-size: cover; 
     background-repeat: no-repeat 
 }
+
+.results {
+    background-image: url(images/library-bg.jpg); 
+    height: 100%; 
+    background-position: center; 
+    background-size: cover; 
+    background-repeat: repeat-y;
+}
+
