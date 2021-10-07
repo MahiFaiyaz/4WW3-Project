@@ -1,5 +1,5 @@
 .main {
-    background-image: url(images/library-bg.jpg); 
+    background-image: url(images/library-bg.webp); 
     height: 100%; 
     background-position: center; 
     background-size: cover; 
@@ -7,7 +7,7 @@
 }
 
 .results {
-    background-image: url(images/library-bg.jpg); 
+    background-image: url(images/library-bg.webp); 
     height: 100%; 
     background-position: center; 
     background-size: cover; 
