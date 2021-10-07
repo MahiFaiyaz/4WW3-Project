@@ -3,7 +3,7 @@
     height: 100%; 
     background-position: center; 
     background-size: cover; 
-    background-repeat: no-repeat 
+    background-repeat: repeat-y 
 }
 
 .results {
@@ -12,5 +12,26 @@
     background-position: center; 
     background-size: cover; 
     background-repeat: repeat-y;
+
 }
 
+html, body {
+    height: 100%;
+}
+
+#container {
+    min-height: 100%;
+}
+
+#main {
+    overflow: auto;
+    padding-bottom: 47px;
+}
+
+#footer {
+    background-color: rgba(0, 0, 0, 0.699);
+    position: relative;
+    height: 47px;
+    margin-top: -47px;
+    clear: both;
+}
