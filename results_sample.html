@@ -4,58 +4,84 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">    
-    <link href="styles.css">
-    <title>Library Locator</title>
+    <link href="styles.css" rel="stylesheet">
+    <title>Result</title>
 </head>
-<body class="bg-light">
-    <nav class="navbar navbar-light navbar-expand-md bg-secondary sticky-top">
-        <a class="navbar-brand mb-2 h1" href="#">Library Locator</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+<body class="bg-secondary">
+    <nav class="navbar navbar-light navbar-expand-md bg-light sticky-top mb-2">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbar">
             <div class="navbar-nav">
-                <a class="nav-item nav-link" href="search.html">Home</a>
-                <a class="nav-item nav-link active" href="results_sample.html">teest</a>
+                <a class="nav-item nav-link text-center text-dark h5" href="search.html">Home</a>
+                <a class="nav-item nav-link text-center text-dark h5" href="submission.html">Submit</a>
+                <a class="nav-item nav-link text-center text-dark h5" href="registration.html">Register</a>
             </div>
         </div>
-    <!-- <div class="results-table">
-        <h1 class="result-header">Results</h1>
-        <div class="search-result">
-            <div class="result">
-                <img src="images/Terryberry.jpg">
-                <h2>Hamilton Public Library - Terryberry Branch</h2>
-                <h3>4 stars</h3>
-                <h3>100 Mohawk Rd W, Hamilton, ON</h3>
+    </nav>    
+    <h1 class="display-5 text-dark bg-light text-center rounded-pill pb-3">
+        Results
+    </h1>
+    <div class="row">
+        <div class="col-md-3 col-12 text-center gx-5">
+            <div class="card text-white bg-dark">
+                <img class="card-img-top" src="images/Terryberry.jpg" alt="Terry Berry Library">
+                <div class="card-body">
+                    <h6>Hamilton Public Library - Terryberry Branch</h6>
+                    <h6>3 stars</h6>
+                    <p class="card-text">100 Mohawk Rd W, Hamilton, ON</p>
+                </div>
             </div>
-            <div class="result">
-                <img src="images/Turner-Park.jpg">
-                <h2>Hamilton Public Library - Turner Park Branch</h2>
-                <h3>3 stars</h3>
-                <h3>352 Rymal Rd E, Hamilton, ON</h3>
+
+            <div class="card text-white bg-dark mt-2">
+                <img class="card-img-top" src="images/Turner-Park.jpg" alt="Terry Berry Library">
+                <div class="card-body">
+                    <h6>Hamilton Public Library - Turner Park Branch</h6>
+                    <h6>5 stars</h6>
+                    <p class="card-text">352 Rymal Rd E, Hamilton, ON</p>
+                </div>
             </div>
-            <div class="result">
-                <img src="images/mohawk.png">
-                <h2>Mohawk College Library</h2>
-                <h3>4 stars</h3>
-                <h3>135 Fennell Ave W, Hamilton, ON</h3>
+
+
+            <div class="card text-white bg-dark mt-2">
+                <img class="card-img-top" src="images/mohawk.png" alt="Terry Berry Library">
+                <div class="card-body">
+                    <h6>Mohawk College Library</h6>
+                    <h6>4 stars</h6>
+                    <p class="card-text">135 Fennell Ave W, Hamilton, ON</p>
+                </div>
             </div>
-            <div class="result">
-                <img src="images/Sherwood.jpg">
-                <h2>Hamilton Public Library - Sherwood Branch</h2>
-                <h3>4 stars</h3>
-                <h3>467 Upper Ottawa St, Hamilton, ON</h3>
+
+
+            <div class="card text-white bg-dark mt-2">
+                <img class="card-img-top" src="images/Sherwood.jpg" alt="Terry Berry Library">
+                <div class="card-body">
+                    <h6>Hamilton Public Library - Sherwood Branch</h6>
+                    <h6>3 stars</h6>
+                    <p class="card-text">467 Upper Ottawa St, Hamilton, ON</p>
+                </div>
             </div>
-            <div class="result">
-                <img src="images/Concession-1.jpg">
-                <h2>Hamilton Public Library - Terryberry Branch</h2>
-                <h3>4 stars</h3>
-                <h3>565 Consession St, Hamilton, ON</h3>
+
+
+            <div class="card text-white bg-dark mt-2">
+                <img class="card-img-top" src="images/Concession-1.jpg" alt="Terry Berry Library">
+                <div class="card-body">
+                    <h6>Hamilton Public Library - Concession Branch</h6>
+                    <h6>4 stars</h6>
+                    <p class="card-text">565 Consession St, Hamilton, ON</p>
+                </div>
             </div>
         </div>
+        <img src="images/Search-map.png" class="img-fluid h-100 col-md-9 col-12 gx-0 my-5 rounded" alt="map">
     </div>
-    <div class="results-map">
-        <img src="images/Search-map.png">
-    </div> -->
+    <footer class="text-center fixed-bottom">
+        <div class="text-center text-light p-3" style="background-color: rgba(0, 0, 0, 0.425);">
+          © 2021 Copyright:
+          <a class="text-light" href="http://18.119.43.170/home/search.html">LibraryLocator.com</a>
+          <p>Contact: Mahi Faiyaz</p>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>
