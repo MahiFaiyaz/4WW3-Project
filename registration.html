@@ -50,12 +50,15 @@
             </h1>
             <!-- Creates a div to position properly and a form within (no action yet) -->
             <div class="container-fluid bg-light p-3 rounded col-12 col-md-6 mx-auto">
-                <form action="#" method="GET">
+                <form action="#" method="GET" id="register" onsubmit="return validate(this)">
                     <label for="firstName" class="form-label">First Name</label>
-                    <input type="text" id="firstName" class="form-control mb-3" placeholder="First name"/>
+                    <input type="text" id="firstName" name="firstName" class="form-control mb-3" placeholder="First name"/>
+                    
                     <label for="lastName" class="form-label">Last Name</label>
-                    <input type="text" id="lastName" class="form-control mb-3" placeholder="Last name"/>
+                    <input type="text" id="lastName" name="lastName" class="form-control mb-3" placeholder="Last name"/>
+                    
                     <label class="form-label">Gender</label>
+                    
                     <!-- Radio buttons -->
                     <div class="container">
                         <div class="form-check form-check-inline">
@@ -71,18 +74,23 @@
                             <label class="form-check-label" for="other">Other</label>
                         </div>
                     </div>
+                    
                     <label for="userEmail" class="form-label mt-3">Email Address</label>
-                    <input type="email" id="userEmail" class="form-control mb-3" placeholder="name@example.com"/>
+                    <input type="email" id="userEmail" name="userEmail" class="form-control mb-3" placeholder="name@example.com"/>
+                    
                     <label for="userPassword" class="form-label">Password</label>
-                    <input type="password" id="userPassword" class="form-control mb-3" placeholder="Password"/>
+                    <input type="password" id="userPassword" name="userPassword" class="form-control mb-3" placeholder="Password"/>
+                    
                     <label for="userBday" class="form-label">Date of Birth</label>
-                    <input type="date" id="userBday" class="form-control mb-3"/>
+                    <input type="date" id="userBday" name="userBday" class="form-control mb-3"/>
+                    
                     <!-- Checkbox -->
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="termsAndService">
-                        <label class="form-check-label" for="termsAndService">Agree to terms and services</label>
+                        <input class="form-check-input" type="checkbox"  onchange="return validateTOS()" value="" id="TOS" name="TOS">
+                        <label class="form-check-label" for="TOS">Agree to terms of services</label>
                     </div>
-                    <button type="submit" class="btn btn-light btn-outline-dark mt-4">Register</button>
+                    
+                    <button type="submit" class="btn btn-light btn-outline-dark mt-4" id="registerBtn" disabled>Register</button>
                 </form>
             </div>
         </div>

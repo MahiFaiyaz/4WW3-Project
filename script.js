@@ -144,3 +144,47 @@ const styles = {
       },
     ],
   };
+
+
+function validate(form) {
+    if (form.firstName.value == "") {
+        window.alert("First name is required.");
+        return false;
+    }
+    if (form.lastName.value == "") {
+        window.alert("Last name is required.");
+        return false;
+    }
+    if (!form.gender.value){
+        window.alert("Gender is required.");
+        return false;    
+    }
+    if (form.userEmail.value == "") {
+        window.alert("Email is required.");
+        return false;
+    }
+    if (form.userPassword.value == "") {
+        window.alert("Password is required.");
+        return false;
+    }
+    if (form.userBday.value == "") {
+        window.alert("Birthdate is required.");
+        return false;
+    }
+    if (!form.TOS.checked) {
+        window.alert("Please agree to the terms of services first.");
+        return false;    
+    }
+}
+
+
+function validateTOS(){
+    const checkbox = document.getElementById("TOS")
+    registerBtn = document.getElementById("registerBtn")
+    if (checkbox.checked) {
+        registerBtn.disabled = false;
+    }
+    else {
+        registerBtn.disabled = true;
+    }
+}
