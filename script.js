@@ -1,5 +1,5 @@
 
-
+//Main getLocation function, takes in function props
 function getLocation(props) {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(props);
@@ -10,21 +10,25 @@ function getLocation(props) {
 }
 
 
+//Function for search bar, which gets latitude and longitude and fills it in the search bar
 function search(position) {
     document.getElementById("search").value = position.coords.latitude + ", " + position.coords.longitude
 }
 
 
+//Function to autoset the latitude with current position on subimssion page 
 function autoSetLat(position){
     document.getElementById("Latitude").value = position.coords.latitude
 }
 
 
+//Function to autoset the longitude with current position on subimssion page
 function autoSetLong(position){
     document.getElementById("Longitude").value = position.coords.longitude
 }
 
 
+// Main function for initializing a map, takes center location, zoom level, and which markers to place as well as if the markers should be opened.
 function initMapMain(center, zoom, markers, openMarkers=false) {
     // The map, centered at "center"
     const map = new google.maps.Map(document.getElementById("map"), {
@@ -35,36 +39,26 @@ function initMapMain(center, zoom, markers, openMarkers=false) {
     //Hide points of interests 
     map.setOptions({styles: styles["hide"]});
 
-    if (!openMarkers) {
-        markers.forEach((marker)=>{
-            var Marker = new google.maps.Marker({
-                position: marker.coordinates,
-                map: map
-            })
-            var infoWindow = new google.maps.InfoWindow({
-                content: marker.content
-            })
-            Marker.addListener('click', function(){
-                infoWindow.open(map, Marker);
-            })
+    //Creates markers based on the given markers array, and opens markers by default if openMarkers is true.
+    markers.forEach((marker)=>{
+        var Marker = new google.maps.Marker({
+            position: marker.coordinates,
+            map: map
         })
-    }
-    else {
-        markers.forEach((marker)=>{
-            var Marker = new google.maps.Marker({
-                position: marker.coordinates,
-                map: map
-            })
-            var infoWindow = new google.maps.InfoWindow({
-                content: marker.content
-            })
+        var infoWindow = new google.maps.InfoWindow({
+            content: marker.content
+        })
+        Marker.addListener('click', function(){
+            infoWindow.open(map, Marker);
+        })
+        if (openMarkers) {
             infoWindow.open(map, Marker)
-        })
-
-    }   
+        }
+    }) 
 }
 
 
+//Map function for results page, initializes center and zoom and creates a list of markers before calling initMapMain
 function initMap() {
     // The location of Hamilton
     const center = { lat: 43.2202, lng: -79.8652 };
@@ -113,6 +107,7 @@ function initMap() {
 }
 
 
+//Map function for individual sample page, initializes center and zoom and creates a markers before calling initMapMain
 function TerryBerry() {
     const center = { lat: 43.2303, lng: -79.8866 };
     const zoom = 15;
@@ -131,6 +126,7 @@ function TerryBerry() {
 }
 
 
+//styles for hiding buisnesses and governemnt points of interest (such as libraries)
 const styles = {
     default: [],
     hide: [
@@ -146,6 +142,7 @@ const styles = {
   };
 
 
+//form validation function that is run to validate each input.
 function validate(form) {
     if (!validateName(form.firstName.value, "First name")) {
         return false;
@@ -169,6 +166,7 @@ function validate(form) {
 }
 
 
+//checks that name is filled in, starts with a capital letter, and only contains letters and spaces.
 function validateName(name, text) {
     if (name == "") {
         window.alert(text + " is required.");
@@ -186,6 +184,7 @@ function validateName(name, text) {
 }
 
 
+//checks that a gender is selected.
 function validateGender(gender) {
     if (!gender){
         window.alert("Gender is required.");
@@ -195,6 +194,7 @@ function validateGender(gender) {
 }
 
 
+//checks that email is filled in and follows proper format.
 function validateEmail(email){
     if (email == "") {
         window.alert("Email is required.");
@@ -208,6 +208,7 @@ function validateEmail(email){
 }
 
 
+//checks that a password is given.
 function validatePassword(password) {
     if (password == "") {
         window.alert("Password is required.");
@@ -217,6 +218,7 @@ function validatePassword(password) {
 }
 
 
+//checks that a birthdate is given and follows proper format (also limited to 1800s oldest.)
 function validateDate(date){
     if (date == "") {
         window.alert("Birthdate is required.");
@@ -230,6 +232,7 @@ function validateDate(date){
 }
 
 
+//checks that TOS is selected before enabling the registration button.
 function validateTOS(){
     const checkbox = document.getElementById("TOS")
     registerBtn = document.getElementById("registerBtn")
