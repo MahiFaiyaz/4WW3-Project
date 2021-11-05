@@ -147,12 +147,25 @@ const styles = {
 
 
 function validate(form) {
-    validateName(form.firstName.value, "First name")
-    validateName(form.lastName.value, "Last name")
-    validateGender(form.gender.value)
-    validateEmail(form.userEmail.value)
-    validatePassword(form.userPassword.value)
-    validateDate(form.userBday.value)
+    if (!validateName(form.firstName.value, "First name")) {
+        return false;
+    }
+    if (!validateName(form.lastName.value, "Last name")){
+        return false;    
+    }
+    if (!validateGender(form.gender.value)){
+        return false;
+    }
+    if (!validateEmail(form.userEmail.value)){
+        return false;
+    }
+    if (!validatePassword(form.userPassword.value)){
+        return false;
+    }
+    if (!validateDate(form.userBday.value)){
+        return false;
+    }
+    return true;
 }
 
 
@@ -161,10 +174,15 @@ function validateName(name, text) {
         window.alert(text + " is required.");
         return false;
     }
-    if (!(/[A-Za-z-]+/.test(name))) {
-        window.alert("Only letters and - allowed for " + text);
+    if (!(/^([A-Z])/.test(name))) {
+        window.alert("Capitalize first letter for " + text);
         return false;
     }
+    if (!(/^([a-zA-Z ]){1,30}$/.test(name))) {
+        window.alert("Only letters allowed for " + text);
+        return false;
+    }
+    return true;
 }
 
 
@@ -173,6 +191,7 @@ function validateGender(gender) {
         window.alert("Gender is required.");
         return false;    
     }
+    return true;
 }
 
 
@@ -181,11 +200,11 @@ function validateEmail(email){
         window.alert("Email is required.");
         return false;
     }
-    if (!(/[A-Za-z0-9._-]+/.test(email))) {
-        window.alert("Only letters and - allowed for " + text);
+    if (!(/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,})+$/.test(email))) {
+        window.alert("Invalid Email");
         return false;
     }
-    
+    return true;
 }
 
 
@@ -194,7 +213,7 @@ function validatePassword(password) {
         window.alert("Password is required.");
         return false;
     }
-
+    return true;
 }
 
 
@@ -203,8 +222,12 @@ function validateDate(date){
         window.alert("Birthdate is required.");
         return false;
     }
+    if (!(/^(18|19|20)\d\d[-](0[1-9]|1[012])[-](0[1-9]|[12][0-9]|3[01])$/.test(date))) {
+        window.alert("Invalid date");
+        return false;
+    }
+    return true;
 }
-
 
 function validateTOS(){
     const checkbox = document.getElementById("TOS")

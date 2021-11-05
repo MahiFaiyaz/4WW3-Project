@@ -8,6 +8,8 @@ Member 2: N/A
 
 Website: https://mahifaiyaz.ca/home/search.html
 
+Git repository: https://github.com/MahiFaiyaz/4WW3_Project_Mahi
+
 For some reason, the video in the individual_sample.html works fine if opened locally,
 but is not properly centered when uploaded to aws.
 
