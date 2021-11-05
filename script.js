@@ -229,6 +229,7 @@ function validateDate(date){
     return true;
 }
 
+
 function validateTOS(){
     const checkbox = document.getElementById("TOS")
     registerBtn = document.getElementById("registerBtn")
