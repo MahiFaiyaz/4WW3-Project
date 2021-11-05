@@ -52,7 +52,7 @@
             <div class="container-fluid bg-light p-3 rounded col-12 col-md-6 mx-auto">
                 <form action="#" method="GET">
                     <label for="libraryName" class="form-label">Library Name</label>
-                    <input type="text" maxlength="255" pattern="[A-Za-z-\s()]{1,255}" title="First letter must be capitalized, only [- , (  , )] special characters are allowed. Max length of 255" 
+                    <input type="text" maxlength="255" pattern="[A-Z][a-z-\s()]*" title="First letter must be capitalized, only [- , (  , )] special characters are allowed. Max length of 255" 
                     id="libraryName" name="libraryName" class="form-control mb-3" placeholder="Library name" required/>
 
                     <label for="Latitude" class="form-label">Latitude</label>

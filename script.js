@@ -147,33 +147,61 @@ const styles = {
 
 
 function validate(form) {
-    if (form.firstName.value == "") {
-        window.alert("First name is required.");
+    validateName(form.firstName.value, "First name")
+    validateName(form.lastName.value, "Last name")
+    validateGender(form.gender.value)
+    validateEmail(form.userEmail.value)
+    validatePassword(form.userPassword.value)
+    validateDate(form.userBday.value)
+}
+
+
+function validateName(name, text) {
+    if (name == "") {
+        window.alert(text + " is required.");
         return false;
     }
-    if (form.lastName.value == "") {
-        window.alert("Last name is required.");
+    if (!(/[A-Za-z-]+/.test(name))) {
+        window.alert("Only letters and - allowed for " + text);
         return false;
     }
-    if (!form.gender.value){
+}
+
+
+function validateGender(gender) {
+    if (!gender){
         window.alert("Gender is required.");
         return false;    
     }
-    if (form.userEmail.value == "") {
+}
+
+
+function validateEmail(email){
+    if (email == "") {
         window.alert("Email is required.");
         return false;
     }
-    if (form.userPassword.value == "") {
+    if (!(/[A-Za-z0-9._-]+/.test(email))) {
+        window.alert("Only letters and - allowed for " + text);
+        return false;
+    }
+    
+}
+
+
+function validatePassword(password) {
+    if (password == "") {
         window.alert("Password is required.");
         return false;
     }
-    if (form.userBday.value == "") {
+
+}
+
+
+function validateDate(date){
+    if (date == "") {
         window.alert("Birthdate is required.");
         return false;
-    }
-    if (!form.TOS.checked) {
-        window.alert("Please agree to the terms of services first.");
-        return false;    
     }
 }
 

@@ -33,11 +33,3 @@ necessary for creating a footer that stayed at the bottom of the page at all tim
     margin-top: -47px;
     clear: both;
 }
-
-/* used for centering video on individual_sample.html page */
-.center_video{
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 5rem;
-    display: block;
-}
