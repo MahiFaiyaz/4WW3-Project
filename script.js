@@ -12,7 +12,21 @@ function getLocation(props) {
 
 //Function for search bar, which gets latitude and longitude and fills it in the search bar
 function search(position) {
-    document.getElementById("search").value = position.coords.latitude + ", " + position.coords.longitude
+    document.getElementById("btnLocation").classList.add('animate__pulse');
+    document.getElementById("search").value = position.coords.latitude + ", " + position.coords.longitude;
+    setTimeout(function(){document.getElementById("btnLocation").classList.remove('animate__pulse'); }, 500)
+}
+
+
+function pulseOnClick(btn) {
+    btn.classList.add('animate__pulse');
+    setTimeout(function() {btn.classList.remove('animate__pulse');}, 500 )
+}
+
+
+function shakeOnClick(btn) {
+    setTimeout(function() {btn.classList.add('animate__shakeX');}, 250)
+    setTimeout(function() {btn.classList.remove('animate__shakeX');}, 1500 )
 }
 
 
