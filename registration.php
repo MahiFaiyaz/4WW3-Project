@@ -1,25 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Registration page.">
-    <!-- Meta data for addon -->
     <meta property="og:title" content="Registration">
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="http://18.119.43.170/home/registration.html" />
-    <meta property="og:image" content="http://trumpwallpapers.com/wp-content/uploads/Library-Wallpaper-19-2560x1600-1.jpg" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">    
-    <link href="styles.css" rel="stylesheet">
-    <link rel="apple-touch-icon" sizes="180x180" href="images/icons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="images/icons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="images/icons/favicon-16x16.png">
-    <link rel="manifest" href="images/icons/site.webmanifest">
-    <link rel="mask-icon" href="images/icons/safari-pinned-tab.svg" color="#5bbad5">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">     <meta name="msapplication-TileColor" content="#013636">
-    <meta name="theme-color" content="#ffffff">
-    <script type="text/javascript" src="script.js"></script>
+    <meta property="og:url" content="http://18.119.43.170/home/registration.php" />
+    <?php include './include/header.php' ?>
     <title>Register</title>
 </head>
 <body class="main">
@@ -28,12 +13,7 @@
         <div id="main">
             <!-- Adds navigation bar, with a toggle button when collapsed below a medium size screen (720px) -->
             <nav class="navbar navbar-light navbar-expand-md bg-light sticky-top mb-1">
-                <a class="navbar-brand" href='search.html'>
-                    <img src="images/logo.png" class="animate__animated animate__rotateIn" alt="logo" width='50' height='50'>
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                <?php include './include/navbar.php' ?>
                 <div class="collapse navbar-collapse" id="navbar">
                     <div class="navbar-nav">
                         <!-- Pill background to show which is currently active -->
@@ -50,7 +30,8 @@
             </h1>
             <!-- Creates a div to position properly and a form within (no action yet) -->
             <div class="container-fluid bg-light p-3 rounded col-12 col-md-6 mx-auto">
-                <form action="#" method="GET" id="register" onsubmit="return validate(this)">
+                <form action="./database/create_user.php" method="POST" id="register" onsubmit="return validate(this)">
+                    <input type="hidden" name="create_token" value="asdf2l3j4@rsfj34$1@asd2agjsd"/>
                     <label for="firstName" class="form-label">First Name</label>
                     <small class="small" id="firstNameError">*First name is required.*</small>
                     <input type="text" id="firstName" name="firstName" class="form-control mb-3" placeholder="First name"/>
@@ -96,16 +77,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Footer with copyright tag and author -->
-    <footer id="footer">
-        <div class="text-center text-light" style="background-color: rgba(0, 0, 0, 0.425);">
-          © 2021 Copyright:
-          <a class="text-light" href="http://18.119.43.170/home/search.html">LibraryLocator.com</a>
-          <div class="p">Author: Mahi Faiyaz</div>
-        </div>
-    </footer>
-    <!-- script for Bootstrap -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <?php include './include/footer.php' ?>
 </body>
 </html>

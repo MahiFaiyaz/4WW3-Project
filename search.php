@@ -1,27 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Search page.">
-    <!-- Meta data for addon -->
     <meta property="og:title" content="Library Locator">
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="http://18.119.43.170/home/search.html" />
-    <meta property="og:image" content="http://trumpwallpapers.com/wp-content/uploads/Library-Wallpaper-19-2560x1600-1.jpg" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">    
-    <link href="styles.css" rel="stylesheet">
-    <link rel="apple-touch-icon" sizes="180x180" href="images/icons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="images/icons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="images/icons/favicon-16x16.png">
-    <link rel="manifest" href="images/icons/site.webmanifest">
-    <link rel="mask-icon" href="images/icons/safari-pinned-tab.svg" color="#5bbad5">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <meta name="msapplication-TileColor" content="#013636">
-    <meta name="theme-color" content="#ffffff">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script type="text/javascript" src="script.js"></script>
+    <meta property="og:url" content="http://18.119.43.170/home/search.php" />
+    <?php include './include/header.php' ?>
     <title>Library Locator</title>
 </head>
 <body class="main">
@@ -29,15 +12,8 @@
     <div id="container">
         <div id="main">
             <!-- Adds navigation bar, with a toggle button when collapsed below a medium size screen (720px) -->
-            <nav class="navbar navbar-light navbar-expand-md bg-light sticky-top">
-                <a class="navbar-brand" href='search.html'>
-                    <img src="images/logo.png" class="animate__animated animate__rotateIn" alt="logo" width='50' height='50'>
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbar">
-                    <div class="navbar-nav">
+            <nav class="navbar navbar-light navbar-expand-md bg-light sticky-top mb-1">
+                <?php include './include/navbar.php' ?>
                         <!-- Pill background to show which is currently active -->
                         <a class="nav-item nav-link text-center text-light h5 rounded-pill bg-dark animate__animated animate__fadeInRight" href="search.html">Home</a>
                         <a class="nav-item nav-link text-center text-dark h5 animate__animated animate__fadeInRight" href="submission.html">Submit</a>
@@ -53,7 +29,7 @@
                 </h1>
                 <!-- The form action directs you to /home/results_sample.html. This will only work when running from the aws server (as the files are all in the home folder).
                 However, running locally it won't work as /home/results_sample.html won't be found. -->
-                <form action="/home/results_sample.html" method="GET" class="mt-5">
+                <form action="test.php" method="GET" class="mt-5">
                     <div class="row g-0">
                         <div class="col-md-2 col-4">
                             <select class="form-select" aria-label="Select rating" name="rating" id="rating">
@@ -76,16 +52,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Footer with copyright tag and author -->
-    <footer id="footer">
-        <div class="text-center text-light" style="background-color: rgba(0, 0, 0, 0.425);">
-          © 2021 Copyright:
-          <a class="text-light" href="http://18.119.43.170/home/search.html">LibraryLocator.com</a>
-          <div class="p">Author: Mahi Faiyaz</div>
-        </div>
-    </footer>
-    <!-- script for Bootstrap -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <?php include './include/footer.php' ?>
 </body>
 </html>
