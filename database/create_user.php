@@ -1,27 +1,51 @@
 <?php
+    session_start();
+    include 'validate_form.php';
+ 
+    $errors = array();
+
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        if (isset($_POST['create_token'])){
-            if(!empty($_POST['create_token'])){
-                if ($_POST['create_token'] == 'asdf2l3j4@rsfj34$1@asd2agjsd'){
-                    $servername = "localhost";
-                    $username = "root";
-                    $password = "";
+        validateField($errors, 'create_token');
+        validateField($errors, 'firstName');
+        validateField($errors, 'lastName');
+        validateField($errors, 'gender');
+        validateField($errors, 'userEmail');
+        validateField($errors, 'userPassword');
+        validateField($errors, 'userBday');
 
-                    $connection = new mysqli($servername, $username, $password);
-                    if ($connection->connect_error) {
-                        die("Connection Failed: ". $connection->connect_error);
-                    }
-
-                    $sql = "CREATE DATABASE TEST1";
-                    if ($connection->query($sql) === TRUE) {
-                        echo "Database created successfully.";
-                    } else {
-                        echo "Error creating database: " . $connection->error;
-                    }
-                    $connection->close();
-
-                } else {echo "Invalid Acess";}
-            } else {echo "Empty Token";}
-        } else {echo "No Token Found";}
-    } else {echo "Invalid Method";}
+        if (count($errors) == 0) {
+            $name = $_POST['firstName'] . ' ' . $_POST['lastName'];
+            $gender = $_POST['gender'];
+            $userEmail = $_POST['userEmail'];
+            $userPassword = password_hash($_POST['userPassword'], PASSWORD_DEFAULT);
+            $userBday = $_POST['userBday'];
+        
+            require 'config.php';
+            $dsn = "mysql:host=$servername;dbname=$dbname;charset=UTF8";
+        
+            try {
+                $pdo = new PDO($dsn, $username, $password);
+                $stmt = $pdo->prepare("SELECT Email FROM Users Where Email = ?");
+                $stmt->bindParam(1, $userEmail);
+                $stmt->execute();
+                if ($stmt->rowCount() > 0 ) {
+                    echo "<script>alert('Email Already Exists');document.location='../registration.php'</script>";
+                } else {
+                    $stmt = $pdo->prepare("INSERT INTO Users (Name, Gender, Email, Password, DateOfBirth)
+                    Values (?, ?, ?, ?, ?)");
+                    $stmt->bindParam(1, $name);
+                    $stmt->bindParam(2, $gender);
+                    $stmt->bindParam(3, $userEmail);
+                    $stmt->bindParam(4, $userPassword);
+                    $stmt->bindParam(5, $userBday);
+                    if ($stmt->execute());
+                        session_destroy();
+                        echo "<script>alert('Registration Successful');document.location='../search.php'</script>";
+                }                 
+            } catch (PDOException $e) {
+                echo "Connection failed: " . $e->getMessage();
+            }
+            $pdo = null;
+        } else  {echo "Error found.";}
+    }
 ?>

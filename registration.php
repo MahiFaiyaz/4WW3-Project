@@ -1,3 +1,5 @@
+<?php session_start() ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +7,13 @@
     <meta property="og:title" content="Registration">
     <meta property="og:url" content="http://18.119.43.170/home/registration.php" />
     <?php include './include/header.php' ?>
-    <title>Register</title>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+
+        });
+    </script>
+    <title>Register</title> -->
 </head>
 <body class="main">
     <!-- Container and main div ids are for properly positioning footer at the bottom -->
@@ -17,10 +25,11 @@
                 <div class="collapse navbar-collapse" id="navbar">
                     <div class="navbar-nav">
                         <!-- Pill background to show which is currently active -->
-                        <a class="nav-item nav-link text-center text-dark h5 animate__animated animate__fadeInRight" href="search.html">Home</a>
-                        <a class="nav-item nav-link text-center text-dark h5 animate__animated animate__fadeInRight" href="submission.html">Submit</a>
-                        <a class="nav-item nav-link text-center text-light h5 rounded-pill bg-dark animate__animated animate__fadeInRight" href="registration.html">Register</a>
-                        <a class="nav-item nav-link text-center text-dark h5 animate__animated animate__fadeInRight" href="about.html">About</a>
+                        <a class="nav-item nav-link text-center text-dark h5 animate__animated animate__fadeInRight" href="search.php">Home</a>
+                        <a class="nav-item nav-link text-center text-dark h5 animate__animated animate__fadeInRight" href="submission.php">Submit</a>
+                        <a class="nav-item nav-link text-center text-light h5 rounded-pill bg-dark animate__animated animate__fadeInRight" href="registration.php">Register</a>
+                        <a class="nav-item nav-link text-center text-dark h5 animate__animated animate__fadeInRight" href="about.php">About</a>
+                        <?php include 'loggedIn.php' ?>
                     </div>
                 </div>
             </nav>       
@@ -33,7 +42,6 @@
                 <form action="./database/create_user.php" method="POST" id="register" onsubmit="return validate(this)">
                     <input type="hidden" name="create_token" value="asdf2l3j4@rsfj34$1@asd2agjsd"/>
                     <label for="firstName" class="form-label">First Name</label>
-                    <small class="small" id="firstNameError">*First name is required.*</small>
                     <input type="text" id="firstName" name="firstName" class="form-control mb-3" placeholder="First name"/>
                     
                     <label for="lastName" class="form-label">Last Name</label>
@@ -73,10 +81,11 @@
                     </div>
                     
                     <button type="submit" onclick="pulseOnClick(this)" class="btn btn-light btn-outline-dark mt-4" id="registerBtn" disabled>Register</button>
+                    <div id="registerMsg"></div>
                 </form>
             </div>
         </div>
     </div>
-    <?php include './include/footer.php' ?>
+    <?php include './include/footer.php'; include 'login_form.php'; ?>
 </body>
 </html>

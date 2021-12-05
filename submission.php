@@ -1,3 +1,6 @@
+<?php session_start() ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,10 +20,11 @@
                 <div class="collapse navbar-collapse" id="navbar">
                     <div class="navbar-nav">
                         <!-- Pill background to show which is currently active -->
-                        <a class="nav-item nav-link text-center text-dark h5 animate__animated animate__fadeInRight" href="search.html">Home</a>
-                        <a class="nav-item nav-link text-center text-light h5 rounded-pill bg-dark animate__animated animate__fadeInRight" href="submission.html">Submit</a>
-                        <a class="nav-item nav-link text-center text-dark h5 animate__animated animate__fadeInRight" href="registration.html">Register</a>
-                        <a class="nav-item nav-link text-center text-dark h5 animate__animated animate__fadeInRight" href="about.html">About</a>
+                        <a class="nav-item nav-link text-center text-dark h5 animate__animated animate__fadeInRight" href="search.php">Home</a>
+                        <a class="nav-item nav-link text-center text-light h5 rounded-pill bg-dark animate__animated animate__fadeInRight" href="submission.php">Submit</a>
+                        <a class="nav-item nav-link text-center text-dark h5 animate__animated animate__fadeInRight" href="registration.php">Register</a>
+                        <a class="nav-item nav-link text-center text-dark h5 animate__animated animate__fadeInRight" href="about.php">About</a>
+                        <?php include 'loggedIn.php' ?>
                     </div>
                 </div>
             </nav>       
@@ -57,6 +61,6 @@
             </div>
         </div>
     </div>
-    <?php include './include/footer.php' ?>
+    <?php include './include/footer.php'; include 'login_form.php'; ?>
 </body>
 </html>

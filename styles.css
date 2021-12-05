@@ -38,3 +38,7 @@ necessary for creating a footer that stayed at the bottom of the page at all tim
 .animate__animated.animate__pulse {
     --animate-duration: 0.5s;
 }
+
+#exampleModal {
+    z-index: 9999999999;
+}

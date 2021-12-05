@@ -180,6 +180,19 @@ function validate(form) {
 }
 
 
+//Form validation function that is run to validate login
+function validateLogin(form) {
+    if (!validateEmail(form.userEmail.value)){
+        return false;
+    }
+    if (!validatePassword(form.userPassword.value)){
+        return false;
+    }
+    return true;
+}
+
+
+
 //checks that name is filled in, starts with a capital letter, and only contains letters and spaces.
 function validateName(name, text) {
     if (name == "") {
