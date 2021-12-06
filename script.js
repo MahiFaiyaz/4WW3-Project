@@ -116,6 +116,7 @@ function initMap() {
             '<p>565 Consession St, Hamilton, ON</p>'     
         }
     ]
+    console.log(markers)
 
     initMapMain(center, zoom, markers)
 }

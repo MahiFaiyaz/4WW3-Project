@@ -5,7 +5,6 @@
     $errors = array();
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        validateField($errors, 'create_token');
         validateField($errors, 'firstName');
         validateField($errors, 'lastName');
         validateField($errors, 'gender');

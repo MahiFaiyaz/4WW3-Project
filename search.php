@@ -19,7 +19,6 @@
                     <div class="navbar-nav">
                         <!-- Pill background to show which is currently active -->
                         <a class="nav-item nav-link text-center text-light h5 rounded-pill bg-dark animate__animated animate__fadeInRight" href="search.php">Home</a>
-                        <a class="nav-item nav-link text-center text-dark h5 animate__animated animate__fadeInRight" href="submission.php">Submit</a>
                         <a class="nav-item nav-link text-center text-dark h5 animate__animated animate__fadeInRight" href="registration.php">Register</a>
                         <a class="nav-item nav-link text-center text-dark h5 animate__animated animate__fadeInRight" href="about.php">About</a> 
                         <?php include 'loggedIn.php' ?>
@@ -31,13 +30,11 @@
                 <h1 class="display-2 text-dark bg-light text-center col-12 col-md-6 mx-auto rounded-pill pb-3 animate__animated animate__fadeIn">
                     Library Locator
                 </h1>
-                <!-- The form action directs you to /home/results_sample.html. This will only work when running from the aws server (as the files are all in the home folder).
-                However, running locally it won't work as /home/results_sample.html won't be found. -->
-                <form action="test.php" method="GET" class="mt-5">
+                <form action="results.php" method="GET" class="mt-5">
                     <div class="row g-0">
                         <div class="col-md-2 col-4">
                             <select class="form-select" aria-label="Select rating" name="rating" id="rating">
-                                <option selected value="0">All ratings</option>
+                                <option value="0">All ratings</option>
                                 <option value="1">1 Star</option>
                                 <option value="2">2 Star</option>
                                 <option value="3">3 Star</option>

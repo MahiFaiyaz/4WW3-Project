@@ -26,7 +26,6 @@
                     <div class="navbar-nav">
                         <!-- Pill background to show which is currently active -->
                         <a class="nav-item nav-link text-center text-dark h5 animate__animated animate__fadeInRight" href="search.php">Home</a>
-                        <a class="nav-item nav-link text-center text-dark h5 animate__animated animate__fadeInRight" href="submission.php">Submit</a>
                         <a class="nav-item nav-link text-center text-light h5 rounded-pill bg-dark animate__animated animate__fadeInRight" href="registration.php">Register</a>
                         <a class="nav-item nav-link text-center text-dark h5 animate__animated animate__fadeInRight" href="about.php">About</a>
                         <?php include 'loggedIn.php' ?>
@@ -40,7 +39,6 @@
             <!-- Creates a div to position properly and a form within (no action yet) -->
             <div class="container-fluid bg-light p-3 rounded col-12 col-md-6 mx-auto">
                 <form action="./database/create_user.php" method="POST" id="register" onsubmit="return validate(this)">
-                    <input type="hidden" name="create_token" value="asdf2l3j4@rsfj34$1@asd2agjsd"/>
                     <label for="firstName" class="form-label">First Name</label>
                     <input type="text" id="firstName" name="firstName" class="form-control mb-3" placeholder="First name"/>
                     

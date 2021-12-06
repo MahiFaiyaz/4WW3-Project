@@ -16,6 +16,7 @@ CREATE TABLE `Users` (
 
 CREATE TABLE `Library` ( 
     `Id` INT NOT NULL AUTO_INCREMENT , 
+    `Name` VARCHAR(255) NOT NULL , 
     `Latitude` FLOAT NOT NULL , 
     `Longitude` FLOAT NOT NULL , 
     `Description` VARCHAR(2048) DEFAULT NULL , 

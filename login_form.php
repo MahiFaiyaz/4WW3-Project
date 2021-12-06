@@ -8,11 +8,14 @@
 			<div class="modal-body">
 				<form  method="POST" id="Login" action="./database/login.php">
 					<label for="loginEmail" class="form-label mt-3">Email Address</label>
-					<input type="email" id="loginEmail" name="loginEmail" class="form-control mb-3" placeholder="name@example.com"/>
+					<input type="email" id="loginEmail" name="loginEmail" class="form-control mb-3" placeholder="name@example.com" value="
+					<?php if((isset($_COOKIE['Email'])) && !empty($_COOKIE['Email'])){
+						echo $_COOKIE['Email'];
+					} ?>"/>
 					<label for="loginPassword" class="form-label">Password</label>
 					<input type="password" id="loginPassword" name="loginPassword" class="form-control mb-3" placeholder="Password"/>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox"  onchange="return validateTOS()" value="" id="rememberMe" name="rememberMe">
+                        <input class="form-check-input" type="checkbox" value="true" id="rememberMe" name="rememberMe">
                         <label class="form-check-label" for="rememberMe">Remember me</label>
                     </div>
 					<button type="button" class="btn btn-light btn-outline-danger" data-bs-dismiss="modal">Close</button>

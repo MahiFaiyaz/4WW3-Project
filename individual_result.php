@@ -1,13 +1,29 @@
-<?php session_start() ?>
+<?php session_start();
+    require './database/config.php';
+    $dsn = "mysql:host=$servername;dbname=$dbname;charset=UTF8";
+
+    if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+        if ((isset($_GET['Library'])) && !empty($_GET['Library'])) {
+            try {
+                $pdo = new PDO($dsn, $username, $password);
+                $stmt = $pdo->prepare("SELECT * FROM Library Where Name = ?");
+                $stmt->execute([$_GET['Library']]);
+                $library = $stmt->fetch();
+            } 
+            catch (PDOException $e) {
+                echo "Connection failed: " . $e->getMessage();
+            }
+            $pd0=null;
+        }
+    } else {echo "Invalid Method";}
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="description" content="Sample library page.">
-    <meta property="og:title" content="Individual Sample">
-    <meta property="og:url" content="http://18.119.43.170/home/individual_sample.php" />
     <?php include './include/header.php' ?>
-    <title>Terry Berry Library</title>
+    <title><?=$library['Name'] ?></title>
 </head>
 <body class="main">
     <!-- Container and main div ids are for properly positioning footer at the bottom -->
@@ -28,14 +44,14 @@
             </nav>    
             <!-- Title of library -->
             <h1 class="display-6 text-dark bg-light text-center rounded-bottom pb-3">
-                Hamilton Public Library - Terryberry Branch
+                <?=$library['Name'] ?>
             </h1>
             <!-- Div with rating and address -->
             <div class="row" style="margin: auto">
                 <div class="col-lg-4 col-12 text-center mt-2 px-2 px-lg-3">
                     <div id="map" style="height: 50vh; width: 100%;"></div>
                     <h2 class="bg-dark text-light text-center rounded-pill mt-2">3 stars</h2>
-                    <p class="bg-dark text-light text-center rounded-pill ">100 Mohawk Rd W, Hamilton, ON</p>
+                    <p class="bg-dark text-light text-center rounded-pill ">Latitude: <?=$library['Latitude']?>, Longitude: <?=$library['Longitude'] ?></p>
                 </div>
                 <img src="images/Terryberry.jpg" class="img-fluid mt-2 px-2 col-lg-8 col-12 gx-0 rounded" alt="Terryberry library">
             </div>
@@ -83,8 +99,27 @@
         </div>
     </div>
     <?php include './include/footer.php'; include 'login_form.php'; ?>
+    <script type=text/javascript> 
+        //Map function for individual sample page, initializes center and zoom and creates a markers before calling initMapMain
+        function LibraryMap() {
+            const center = { lat: <?=$library['Latitude']?>, lng: <?=$library['Longitude']?> };
+            const zoom = 15;
+            const openMarkers = true;
+
+            const markers = [
+                {
+                    coordinates: { lat: <?=$library['Latitude']?>, lng: <?=$library['Longitude']?> },
+                    content:
+                    '<h5><?=$library['Name']?></h5>' + 
+                    '<h6>3 stars</h6>' +
+                    '<p>Latitude: <?=$library['Latitude']?>, Longitude: <?=$library['Longitude']?></p>'
+                }
+            ]
+            initMapMain(center, zoom, markers, openMarkers)
+        }
+    </script>
     <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDnxIv8WOpNBus9nc4vY8kgpQtH1gcDuro&callback=TerryBerry&libraries=&v=weekly"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDnxIv8WOpNBus9nc4vY8kgpQtH1gcDuro&callback=LibraryMap&libraries=&v=weekly"
       async
     ></script>
 </body>
