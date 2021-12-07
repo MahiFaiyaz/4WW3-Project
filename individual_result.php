@@ -50,7 +50,15 @@
             <div class="row" style="margin: auto">
                 <div class="col-lg-4 col-12 text-center mt-2 px-2 px-lg-3">
                     <div id="map" style="height: 50vh; width: 100%;"></div>
-                    <h2 class="bg-dark text-light text-center rounded-pill mt-2">3 stars</h2>
+                    <h2 class="bg-dark text-light text-center rounded-pill mt-2">
+                    <?php 
+                    if ($library['Rating']) {
+                        echo $library['Rating'] . " stars";
+                    } else {
+                        echo "Unrated";
+                    }
+                    ?>
+                    </h2>
                     <p class="bg-dark text-light text-center rounded-pill ">Latitude: <?=$library['Latitude']?>, Longitude: <?=$library['Longitude'] ?></p>
                 </div>
                 <img src="images/Terryberry.jpg" class="img-fluid mt-2 px-2 col-lg-8 col-12 gx-0 rounded" alt="Terryberry library">
@@ -96,26 +104,70 @@
                     </p>
                 </div>
             </div>
+            <div class="card text-white bg-secondary mt-2 mb-5 col-md-8 col-12 mx-auto bg-gradient" >
+                <div class="card-body col-6 mx-auto w-0 text-start w-100">
+                <form action="#" method="GET">
+                    <div class="col-md-2 col-4">
+                        <label for="libraryRating" class="form-label">Library Rating</label>
+                        <select class="form-select" aria-label="Select rating" name="libraryRating" id="libraryRating">
+                            <option value="1">1 Star</option>
+                            <option value="2">2 Star</option>
+                            <option value="3">3 Star</option>
+                            <option value="4">4 Star</option>
+                            <option selected value="5">5 Star</option>
+                        </select>
+                    </div>
+                        <label for="libraryReview" class="form-label">Library Review</label>
+                        <textarea maxlength="2000" id="libraryReview" name="libraryReview" class="form-control mb-3" placeholder="Library Review" rows="4"></textarea>
+                    <input type="submit"/>
+                </form>
+                </div>
+            </div>
         </div>
     </div>
     <?php include './include/footer.php'; include 'login_form.php'; ?>
     <script type=text/javascript> 
         //Map function for individual sample page, initializes center and zoom and creates a markers before calling initMapMain
         function LibraryMap() {
-            const center = { lat: <?=$library['Latitude']?>, lng: <?=$library['Longitude']?> };
-            const zoom = 15;
-            const openMarkers = true;
+            const map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 1,
+            center: {lat: <?=$library['Latitude']?>, lng: <?=$library['Longitude']?> },
+            maxZoom: 15
+            });
+
+            map.setOptions({styles: styles["hide"]});
+            var bounds  = new google.maps.LatLngBounds();
 
             const markers = [
                 {
                     coordinates: { lat: <?=$library['Latitude']?>, lng: <?=$library['Longitude']?> },
                     content:
                     '<h5><?=$library['Name']?></h5>' + 
-                    '<h6>3 stars</h6>' +
+                    '<h6><?php 
+                    if ($library['Rating']) {
+                        echo $library['Rating'] . " stars";
+                    } else {
+                        echo "Unrated";
+                    }
+                    ?></h6>' +
                     '<p>Latitude: <?=$library['Latitude']?>, Longitude: <?=$library['Longitude']?></p>'
                 }
             ]
-            initMapMain(center, zoom, markers, openMarkers)
+
+            markers.forEach((marker)=>{
+                var Marker = new google.maps.Marker({
+                    position: marker.coordinates,
+                    map: map
+                })
+                bounds.extend(Marker.position);
+                var infoWindow = new google.maps.InfoWindow({
+                    content: marker.content
+                })
+                Marker.addListener('click', function(){
+                    infoWindow.open(map, Marker);
+                })
+            }) 
+            map.fitBounds(bounds);
         }
     </script>
     <script

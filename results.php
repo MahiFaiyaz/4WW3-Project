@@ -20,7 +20,6 @@
                     <div class="navbar-nav">
                         <!-- Pill background to show which is currently active (in this case none)-->
                         <a class="nav-item nav-link text-center text-dark h5 animate__animated animate__fadeInRight" href="search.php">Home</a>
-                        <a class="nav-item nav-link text-center text-dark h5 animate__animated animate__fadeInRight" href="submission.php">Submit</a>
                         <a class="nav-item nav-link text-center text-dark h5 animate__animated animate__fadeInRight" href="registration.php">Register</a>
                         <a class="nav-item nav-link text-center text-dark h5 animate__animated animate__fadeInRight" href="about.php">About</a>
                         <?php include 'loggedIn.php' ?>
@@ -49,22 +48,47 @@
         // Map function that grabs a PHP array which has coordinates and names and converts it into a javascript object, adds it into the markers array,
         // before passing the vairbale into initMapMain, which is the main function that sets the parameters for the googleMaps API and is called.
         function ResultMap() {
-            const center = { lat: 5, lng: 25 };
-            const zoom = 1;
-            const openMarkers = true;
+            const map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 1,
+            center: {lat: 0, lng: 0},
+            maxZoom: 15
+            });
+
+            map.setOptions({styles: styles["hide"]});
+            var bounds  = new google.maps.LatLngBounds();
 
             markers = [];
             var create_markers = <?php echo json_encode($markers) ?>
 
             for (var i = 0; i < create_markers.length; i++) {
-                test1 = {coordinates : { lat: parseInt(create_markers[i]['Latitude']), lng: parseInt(create_markers[i]['Longitude']) }}
-                test1['content'] = '<h5><a href="individual_result.php?Library=' + create_markers[i]['Name'] + '">' + create_markers[i]['Name'] + '</a></h5>' + '<h6>5 stars</h6>' +
+                var rate;
+                if (create_markers[i]['Rating']) {
+                    rate = create_markers[i]['Rating'] + " stars";
+                } else {
+                    rate = "Unrated";
+                }
+                markerToAdd = {coordinates : { lat: parseInt(create_markers[i]['Latitude']), lng: parseInt(create_markers[i]['Longitude']) }}
+                markerToAdd['content'] = '<h5><a href="individual_result.php?Library=' + create_markers[i]['Name'] + '">' + create_markers[i]['Name'] + '</a></h5>' + '<h6>' + rate + '</h6>' +
                 '<p>Latitude: ' + create_markers[i]['Latitude'] + ', Longitude: ' + create_markers[i]['Longitude'] + ' </p>';
-                markers.push(test1);
+                markers.push(markerToAdd);
             }
-            initMapMain(center, zoom, markers, openMarkers)
+
+            markers.forEach((marker)=>{
+                var Marker = new google.maps.Marker({
+                    position: marker.coordinates,
+                    map: map
+                })
+                bounds.extend(Marker.position);
+                var infoWindow = new google.maps.InfoWindow({
+                    content: marker.content
+                })
+                Marker.addListener('click', function(){
+                    infoWindow.open(map, Marker);
+                })
+            }) 
+            map.fitBounds(bounds);
         }
-    </script>
+</script>
     <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDnxIv8WOpNBus9nc4vY8kgpQtH1gcDuro&callback=ResultMap&libraries=&v=weekly"
       async

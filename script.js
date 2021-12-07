@@ -52,6 +52,7 @@ function initMapMain(center, zoom, markers, openMarkers=false) {
 
     //Hide points of interests 
     map.setOptions({styles: styles["hide"]});
+    var bounds  = new google.maps.LatLngBounds();
 
     //Creates markers based on the given markers array, and opens markers by default if openMarkers is true.
     markers.forEach((marker)=>{
@@ -59,6 +60,7 @@ function initMapMain(center, zoom, markers, openMarkers=false) {
             position: marker.coordinates,
             map: map
         })
+        bounds.extend(Marker.position);
         var infoWindow = new google.maps.InfoWindow({
             content: marker.content
         })
@@ -69,6 +71,7 @@ function initMapMain(center, zoom, markers, openMarkers=false) {
             infoWindow.open(map, Marker)
         }
     }) 
+
 }
 
 

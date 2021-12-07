@@ -25,14 +25,15 @@ CREATE TABLE `Library` (
     `Created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , 
     `Updated` TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , 
     `UserId` INT,
+    `Rating` INT DEFAULT NULL ,
     PRIMARY KEY (`Id`),
     FOREIGN KEY (`UserId`) REFERENCES Users(`Id`)
     );
 
 CREATE TABLE `Reviews` ( 
     `Id` INT NOT NULL AUTO_INCREMENT , 
-    `LibraryId` INT , 
-    `UserId` INT , 
+    `LibraryId` INT NOT NULL, 
+    `UserId` INT NOT NULL, 
     `Review` VARCHAR(2048) DEFAULT NULL ,
     `Rating` INT NOT NULL ,
     PRIMARY KEY (`Id`),
