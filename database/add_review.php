@@ -9,12 +9,14 @@
                         $dsn = "mysql:host=$servername;dbname=$dbname;charset=UTF8";
                         $libRating = $_GET['libraryRating'];
                         $libReview = $_GET['libraryReview'];
+                        $libName = $_GET['libraryName'];
                         try {
                             $pdo = new PDO($dsn, $username, $password);
-                            $stmt = $pdo->prepare("SELECT Id FROM Library WHERE Name = ?");
-                            $stmt->bindParam(1, $_GET['libraryName']);
+                            $stmt = $pdo->prepare("SELECT * FROM Library WHERE `Name` = ?");
+                            $stmt->bindParam(1, $libName);
                             $stmt->execute();
-                            $libId = ($stmt->fetch())['Id'];
+                            $library = $stmt->fetch();
+                            $libId = $library['Id'];
 
                             $stmt = $pdo->prepare("SELECT * FROM Users Where Email = ?");
                             $stmt->bindParam(1, $_SESSION['Email']);
@@ -39,8 +41,6 @@
                             if ($resultsCount > 0) {
                                 while ($row = $stmt->fetch()) {
                                     $total += $row['Rating'];
-                                    print_r($row);
-                                    echo "<br></br>";
                                 }
                             }
                             $average = $total/$resultsCount;
@@ -49,7 +49,7 @@
                             $stmt->bindParam(2, $libId);
                             $stmt->execute();
 
-                            header('Location: ../individual_result.php?Library=' . $_GET['libraryName'] );
+                            header('Location: ../individual_result.php?Library=' . $libName );
                             exit();
                         }
                         catch (PDOException $e) {

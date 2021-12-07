@@ -70,6 +70,7 @@
             <?php 
                 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     if ((isset($_GET['Library'])) && !empty($_GET['Library'])) {
+
                         try {
                             $pdo = new PDO($dsn, $username, $password);
                             $stmt = $pdo->prepare("SELECT Id FROM Library WHERE Name = ?");
@@ -123,7 +124,7 @@
                         </div>
                         <label for="libraryReview" class="form-label">Library Review</label>
                         <textarea maxlength="2000" id="libraryReview" name="libraryReview" class="form-control mb-3" placeholder="Library Review" rows="4"></textarea>
-                        <input type="hidden" id="libraryName" name="libraryName" value=<?=$library['Name']?>>
+                        <input type="hidden" id="libraryName" name="libraryName" value="<?=$library['Name']?>">
                         <input type="submit"/>
                     </form>
                     </div>
