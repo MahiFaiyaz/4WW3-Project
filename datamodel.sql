@@ -22,10 +22,10 @@ CREATE TABLE `Library` (
     `Description` VARCHAR(2048) DEFAULT NULL , 
     `ImageFilePath` VARCHAR(255) DEFAULT NULL , 
     `VideoFilePath` VARCHAR(255) DEFAULT NULL , 
+    `Rating` INT DEFAULT NULL ,
+    `UserId` INT NOT NULL,
     `Created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , 
     `Updated` TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , 
-    `UserId` INT,
-    `Rating` INT DEFAULT NULL ,
     PRIMARY KEY (`Id`),
     FOREIGN KEY (`UserId`) REFERENCES Users(`Id`)
     );

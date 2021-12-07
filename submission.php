@@ -1,6 +1,4 @@
 <?php session_start() ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,9 +31,9 @@
             </h1>
             <!-- Container with a form within for all library information. Also has a input for image and video -->
             <div class="container-fluid bg-light p-3 rounded col-12 col-md-6 mx-auto">
-                <form action="#" method="GET">
+                <form action="./database/add_library.php" method="POST">
                     <label for="libraryName" class="form-label">Library Name</label>
-                    <input type="text" maxlength="255" pattern="[A-Z][a-z\-\s\(\)]*" title="First letter must be capitalized, only [- , (  , )] special characters are allowed. Max length of 255" 
+                    <input type="text" maxlength="255" pattern="[A-Z][A-za-z\-\s\(\)]*" title="First letter must be capitalized, only [- , (  , )] special characters are allowed. Max length of 255" 
                     id="libraryName" name="libraryName" class="form-control mb-3" placeholder="Library name" required/>
 
                     <label for="Latitude" class="form-label">Latitude</label>
