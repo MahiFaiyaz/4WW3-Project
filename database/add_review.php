@@ -23,8 +23,8 @@
                             $name = $results['Name'];
                             $userId = $results['Id'];
 
-                            $stmt = $pdo->prepare("INSERT INTO Reviews (LibraryId, UserId, Review, Rating)
-                            Values (?, ?, ?, ?)");
+                            $stmt = $pdo->prepare("INSERT INTO `Reviews` (`LibraryId`, `UserId`, `Review`, `Rating`)
+                            VALUES (?, ?, ?, ?)");
                             $stmt->bindParam(1, $libId);
                             $stmt->bindParam(2, $userId);
                             $stmt->bindParam(3, $libReview);
