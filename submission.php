@@ -31,7 +31,7 @@
             </h1>
             <!-- Container with a form within for all library information. Also has a input for image and video -->
             <div class="container-fluid bg-light p-3 rounded col-12 col-md-6 mx-auto">
-                <form action="./database/add_library.php" method="POST">
+                <form action="./database/add_library.php" method="POST" enctype="multipart/form-data">
                     <label for="libraryName" class="form-label">Library Name</label>
                     <input type="text" maxlength="255" pattern="[A-Z][A-za-z\-\s\(\)]*" title="First letter must be capitalized, only [- , (  , )] special characters are allowed. Max length of 255" 
                     id="libraryName" name="libraryName" class="form-control mb-3" placeholder="Library name" required/>
@@ -48,7 +48,7 @@
                     <textarea maxlength="2000" id="libraryDesc" name="libraryDesc" class="form-control mb-3" placeholder="Library Description" rows="4"></textarea>
                     
                     <label for="libraryImg" class="form-label">Library Image</label>
-                    <input type="file" id="libraryImg" name="libraryImg" class="form-control file mb-3" accept=".jpg, .png, .jpeg"></textarea>
+                    <input type="file" id="libraryImg" name="libraryImg" class="form-control file mb-3" accept=".jpg, .png, .jpeg" ></textarea>
                     
                     <label for="libraryVid" class="form-label">Library Video</label>
                     <input type="file" id="libraryVid" name="libraryVid" class="form-control file mb-3" accept=".mp4, .mov, .wmv, .avi, .mkv, .mpeg-2"></textarea>

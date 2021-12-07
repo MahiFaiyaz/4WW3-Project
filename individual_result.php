@@ -60,7 +60,15 @@
                     </h2>
                     <p class="bg-dark text-light text-center rounded-pill ">Latitude: <?=$library['Latitude']?>, Longitude: <?=$library['Longitude'] ?></p>
                 </div>
-                <img src="images/Terryberry.jpg" class="img-fluid mt-2 px-2 col-lg-8 col-12 gx-0 rounded" alt="Terryberry library">
+                <?php 
+                    if ((isset($library['ImageFilePath'])) && !empty($library['ImageFilePath'])){
+                        $imgSource = 'https://library-finder-library-images.s3.us-east-2.amazonaws.com/' . $library['ImageFilePath']; 
+                    }
+                    else {
+                        $imgSource = 'https://library-finder-library-images.s3.us-east-2.amazonaws.com/images/Library.jpg';
+                    }
+                ?>
+                <img src="<?=$imgSource?>" class="img-fluid mt-2 px-2 col-lg-8 col-12 gx-0 rounded" alt="Terryberry library">
             </div>
             <!-- Review title -->
             <h2 class="display-6 text-dark bg-light text-center col-md-6 col-12 my-3 mx-auto rounded-pill pb-3">

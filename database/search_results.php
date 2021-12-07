@@ -28,12 +28,19 @@
                         if ($resultsCount > 0) {
                             while ($row = $stmt->fetch()) {
                                 $marker = Array('Name'=>$row['Name'], 'Latitude'=>$row['Latitude'], 'Longitude'=>$row['Longitude'], 'Rating'=>$row['Rating']);
-                                $markers[] = $marker;?>
+                                $markers[] = $marker;
+                                if ((isset($row['ImageFilePath'])) && !empty($row['ImageFilePath'])){
+                                    $imgSource = 'https://library-finder-library-images.s3.us-east-2.amazonaws.com/' . $row['ImageFilePath']; 
+                                }
+                                else {
+                                    $imgSource = 'https://library-finder-library-images.s3.us-east-2.amazonaws.com/images/Library.jpg';
+                                }
+                                ?>
                                 <a class="card text-white bg-dark my-2" href="individual_result.php?Library=<?= $row['Name']?>">
-                                    <img class="card-img-top" src="images/Concession-1.jpg" alt="<?=$row['Name'] ?>">
+                                    <img class="card-img-top" src="<?=$imgSource?>" alt="<?=$row['Name'] ?>">
                                     <div class="card-body">
                                         <h5><?=$row['Name'] ?></h5>
-                                        <h6>                                    <?php 
+                                        <h6><?php 
                                         if ($row['Rating']) {
                                             echo $row['Rating'] . " stars";
                                         } else {
@@ -62,9 +69,16 @@
                         if ($resultsCount > 0) {
                             while ($row = $stmt->fetch()) {
                                 $marker = Array('Name'=>$row['Name'], 'Latitude'=>$row['Latitude'], 'Longitude'=>$row['Longitude'], 'Rating'=>$row['Rating']);
-                                $markers[] = $marker;?>
+                                $markers[] = $marker;
+                                if ((isset($row['ImageFilePath'])) && !empty($row['ImageFilePath'])){
+                                    $imgSource = 'https://library-finder-library-images.s3.us-east-2.amazonaws.com/' . $row['ImageFilePath']; 
+                                }
+                                else {
+                                    $imgSource = 'https://library-finder-library-images.s3.us-east-2.amazonaws.com/images/Library.jpg';
+                                }
+                                ?>
                                 <a class="card text-white bg-dark my-2" href="individual_result.php?Library=<?= $row['Name']?>">
-                                    <img class="card-img-top" src="images/Concession-1.jpg" alt="<?=$row['Name'] ?>">
+                                    <img class="card-img-top" src="<?=$imgSource?>" alt="<?=$row['Name'] ?>">
                                     <div class="card-body">
                                         <h5><?=$row['Name'] ?></h5>
                                         <h6>                                    <?php 
@@ -107,9 +121,16 @@
                         if ($resultsCount > 0) {
                             while ($row = $stmt->fetch()) {
                                 $marker = Array('Name'=>$row['Name'], 'Latitude'=>$row['Latitude'], 'Longitude'=>$row['Longitude'], 'Rating'=>$row['Rating']);
-                                $markers[] = $marker;?>
+                                $markers[] = $marker;
+                                if ((isset($row['ImageFilePath'])) && !empty($row['ImageFilePath'])){
+                                    $imgSource = 'https://library-finder-library-images.s3.us-east-2.amazonaws.com/' . $row['ImageFilePath']; 
+                                }
+                                else {
+                                    $imgSource = 'https://library-finder-library-images.s3.us-east-2.amazonaws.com/images/Library.jpg';
+                                }
+                                ?>
                                 <a class="card text-white bg-dark my-2" href="individual_result.php?Library=<?= $row['Name']?>">
-                                    <img class="card-img-top" src="images/Concession-1.jpg" alt="<?=$row['Name'] ?>">
+                                    <img class="card-img-top" src="<?=$imgSource?>" alt="<?=$row['Name'] ?>">
                                     <div class="card-body">
                                         <h5><?=$row['Name'] ?></h5>
                                         <h6>                                    <?php 
@@ -140,9 +161,16 @@
                         if ($resultsCount > 0) {
                             while ($row = $stmt->fetch()) {
                                 $marker = Array('Name'=>$row['Name'], 'Latitude'=>$row['Latitude'], 'Longitude'=>$row['Longitude'], 'Rating'=>$row['Rating']);
-                                $markers[] = $marker;?>
+                                $markers[] = $marker;
+                                if ((isset($row['ImageFilePath'])) && !empty($row['ImageFilePath'])){
+                                    $imgSource = 'https://library-finder-library-images.s3.us-east-2.amazonaws.com/' . $row['ImageFilePath']; 
+                                }
+                                else {
+                                    $imgSource = 'https://library-finder-library-images.s3.us-east-2.amazonaws.com/images/Library.jpg';
+                                }
+                                ?>
                                 <a class="card text-white bg-dark my-2" href="individual_result.php?Library=<?= $row['Name']?>">
-                                    <img class="card-img-top" src="images/Concession-1.jpg" alt="<?=$row['Name'] ?>">
+                                    <img class="card-img-top" src="<?=$imgSource?>" alt="<?=$row['Name'] ?>">
                                     <div class="card-body">
                                         <h5><?=$row['Name'] ?></h5>
                                         <h6>                                    <?php 
@@ -177,9 +205,16 @@
                     if ($resultsCount > 0) {
                         while ($row = $stmt->fetch()) {
                             $marker = Array('Name'=>$row['Name'], 'Latitude'=>$row['Latitude'], 'Longitude'=>$row['Longitude'], 'Rating'=>$row['Rating']);
-                            $markers[] = $marker;?>
+                            $markers[] = $marker;
+                            if ((isset($row['ImageFilePath'])) && !empty($row['ImageFilePath'])){
+                                $imgSource = 'https://library-finder-library-images.s3.us-east-2.amazonaws.com/' . $row['ImageFilePath']; 
+                            }
+                            else {
+                                $imgSource = 'https://library-finder-library-images.s3.us-east-2.amazonaws.com/images/Library.jpg';
+                            }
+                            ?>
                             <a class="card text-white bg-dark my-2" href="individual_result.php?Library=<?= $row['Name']?>">
-                                <img class="card-img-top" src="images/Concession-1.jpg" alt="<?=$row['Name'] ?>">
+                                <img class="card-img-top" src="<?=$imgSource?>" alt="<?=$row['Name'] ?>">
                                 <div class="card-body">
                                     <h5><?=$row['Name'] ?></h5>
                                     <h6>                                    <?php 
@@ -210,9 +245,16 @@
                     if ($resultsCount > 0) {
                         while ($row = $stmt->fetch()) {
                             $marker = Array('Name'=>$row['Name'], 'Latitude'=>$row['Latitude'], 'Longitude'=>$row['Longitude'], 'Rating'=>$row['Rating']);
-                            $markers[] = $marker;?>
+                            $markers[] = $marker;
+                            if ((isset($row['ImageFilePath'])) && !empty($row['ImageFilePath'])){
+                                $imgSource = 'https://library-finder-library-images.s3.us-east-2.amazonaws.com/' . $row['ImageFilePath']; 
+                            }
+                            else {
+                                $imgSource = 'https://library-finder-library-images.s3.us-east-2.amazonaws.com/images/Library.jpg';
+                            }
+                            ?>
                             <a class="card text-white bg-dark my-2" href="individual_result.php?Library=<?= $row['Name']?>">
-                                <img class="card-img-top" src="images/Concession-1.jpg" alt="<?=$row['Name'] ?>">
+                                <img class="card-img-top" src="<?=$imgSource?>" alt="<?=$row['Name'] ?>">
                                 <div class="card-body">
                                     <h5><?=$row['Name'] ?></h5>
                                     <h6>
