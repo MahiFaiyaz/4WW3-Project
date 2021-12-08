@@ -50,7 +50,7 @@
             </h1>
             <div class="row" style="margin: auto">
                 <div class="col-lg-4 col-12 text-center mt-2 px-2 px-lg-3">
-                    <div id="map" style="height: 50vh; width: 100%;"></div>
+                    <div id="map" style="height: 50vh; width: 100%" class="rounded"></div>
                     <h2 class="bg-dark text-light text-center rounded-pill mt-2">
                     <?php 
                     // If library has rating, show rating, otherwise unrated
@@ -74,7 +74,7 @@
                     }
                 ?>
                 <!-- display image -->
-                <img src="<?=$imgSource?>" class="img-fluid mt-2 px-2 col-lg-8 col-12 gx-0 rounded" alt="Terryberry library">
+                <img src="<?=$imgSource?>" class="img-fluid mt-2 px-2 col-lg-8 col-12 gx-0" style="border-radius: 2%" alt="Terryberry library">
             </div>
             <!-- Review title -->
             <h2 class="display-6 text-dark bg-light text-center col-md-6 col-12 my-3 mx-auto rounded-pill pb-3">
