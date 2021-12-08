@@ -55,7 +55,7 @@
         function ResultMap() {
             const map = new google.maps.Map(document.getElementById("map"), {
             zoom: 1,
-            center: {lat: 0, lng: 0},
+            center: {lat: 43, lng: -80},
             maxZoom: 15
             });
 
