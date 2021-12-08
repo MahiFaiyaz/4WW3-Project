@@ -37,7 +37,7 @@
         <!-- Add a anchor called LogOut, which uses the following script to submit a form with the current URL -->
         <form action="./database/logout.php" method="POST" id="logOutForm">
             <input type="hidden" name="currentURL" value="<?=$_SERVER['REQUEST_URI'] ?>"/>
-            <a class="nav-item nav-link text-center text-dark h5 animate__animated animate__fadeInRight" onclick="submitLogOutForm()" href="#">Log Out</a>
+            <a class="nav-item nav-link text-center text-danger rounded-pill h5 animate__animated animate__fadeInRight" onclick="submitLogOutForm()" href="#">Log Out</a>
         </form>
         <script>
             function submitLogOutForm() {
@@ -57,7 +57,7 @@
         }
         ?>
         <!-- Show a navigation link for Login (which brings up a Modal form) -->
-        <a class="nav-item nav-link text-center text-dark h5 animate__animated animate__fadeInRight" data-bs-toggle="modal" data-bs-target="#LoginModal" href="#">Login</a>'
+        <a class="nav-item nav-link text-center text-primary rounded-pill h5 animate__animated animate__fadeInRight" data-bs-toggle="modal" data-bs-target="#LoginModal" href="#">Login</a>'
         <?php
     }
 ?>
