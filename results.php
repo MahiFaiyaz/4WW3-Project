@@ -54,7 +54,7 @@
         // That array is then processed, and js objects are created with coordinates and content retrieved from the create_markers array, which is then used by the Google Maps API to generate markers on the search page.
         function ResultMap() {
             const map = new google.maps.Map(document.getElementById("map"), {
-            zoom: 1,
+            zoom: 5,
             center: {lat: 43, lng: -80},
             maxZoom: 15
             });
@@ -94,8 +94,10 @@
                     infoWindow.open(map, Marker);
                 })
             }) 
-            // Auto zoom and pan the map to display all the markers
-            map.fitBounds(bounds);
+            // Auto zoom and pan the map to display all the markers if there are markers added (otherwise default to around hamilton with zoom 5)
+            if (markers.length > 0) {
+                map.fitBounds(bounds);
+            }
         }
 </script>
     <script
