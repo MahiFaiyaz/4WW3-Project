@@ -2,6 +2,18 @@
 // Start session, include validate form
     session_start();
     include 'validate_form.php';
+
+    // generates a random string to be added to the image file path (incase an image with the same name of 
+    // an existing one is submitted, this will prevent overwrite)
+    function generateRandomString($length=20) {
+        $char = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $randString = '';
+        $charStringLen = strlen($char) - 1;
+        for ($i = 0; $i < $length; $i++) {
+            $randString .= $char[rand(0, $charStringLen)];
+        }
+        return $randString;
+    }
  
     $errors = array();
 
@@ -45,7 +57,7 @@
                         $userId = $results['Id'];
                         // if a file is given for the image input, upload the file to the s3 bucket using putObject
                         if (isset($_FILES['libraryImg']['name']) && !empty($_FILES['libraryImg']['name'])) {
-                            $file_name = 'images/' . $_FILES['libraryImg']['name'];
+                            $file_name = 'images/' . generateRandomString() . $_FILES['libraryImg']['name'];
                             $temp_file_location = $_FILES['libraryImg']['tmp_name'];
                             require 's3.php';
                 
