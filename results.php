@@ -75,7 +75,7 @@
                     rate = "Unrated";
                 }
                 // Create marker with latitude and longitude from library database as well as rating.
-                markerToAdd = {coordinates : { lat: parseInt(create_markers[i]['Latitude']), lng: parseInt(create_markers[i]['Longitude']) }}
+                markerToAdd = {coordinates : { lat: parseFloat(create_markers[i]['Latitude']), lng: parseFloat(create_markers[i]['Longitude']) }}
                 markerToAdd['content'] = '<h5><a href="individual_result.php?Library=' + create_markers[i]['Name'] + '">' + create_markers[i]['Name'] + '</a></h5>' + '<h6>' + rate + '</h6>' +
                 '<p>Latitude: ' + create_markers[i]['Latitude'] + ', Longitude: ' + create_markers[i]['Longitude'] + ' </p>';
                 markers.push(markerToAdd);
