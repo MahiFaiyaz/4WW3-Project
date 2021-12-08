@@ -25,16 +25,6 @@ necessary for creating a footer that stayed at the bottom of the page at all tim
     padding-bottom: 47px;
 }
 
-/* Sets the height of the footer, and negative margin so it does not go off page */
-#footer {
-    background-color: rgba(0, 0, 0, 0.699);
-    position: relative;
-    height: 47px;
-    margin-top: -47px;
-    clear: both;
-}
-
-
 .animate__animated.animate__pulse {
     --animate-duration: 0.5s;
 }

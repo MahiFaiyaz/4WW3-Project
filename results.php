@@ -37,9 +37,9 @@
                 <!-- Table take 25% of the screen on 720px and larger screen, with other 75% being the map.
                 On smaller screens, they are stacked and it shows table (100% width) with the map below it-->
                 <div class="col-lg-9 px-lg-3 col-12 gx-0 my-lg-3 my-2 px-lg-5 px-2">
-                    <div id="map" style="height: 80vh; width: 100%;" class="rounded"></div>
+                    <div id="map" style="height: 78vh; width: 100%;" class="rounded"></div>
                 </div>
-                <div class="col-lg-3 col-10 text-center mx-auto px-2 g-lg-2">
+                <div class="col-lg-3 col-10 text-center mx-auto px-5 g-lg-2 overflow-auto" style="height: 78vh">
                 <!-- Include database/search_results which generates the results -->
                 <?php  include './database/search_results.php' ?>
                 </div>
