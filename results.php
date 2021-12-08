@@ -1,3 +1,4 @@
+<!-- Start PHP session -->
 <?php session_start() ?>
 
 <!DOCTYPE html>
@@ -6,6 +7,7 @@
     <meta name="description" content="Sample results page.">
     <meta property="og:title" content="Sample Results">
     <meta property="og:url" content="http://18.119.43.170/home/results_sample.php" />
+    <!-- Include headers -->
     <?php include './include/header.php' ?>
     <title>Result</title>
 </head>
@@ -15,14 +17,15 @@
         <div id="main">
             <!-- Adds navigation bar, with a toggle button when collapsed below a medium size screen (720px) -->
             <nav class="navbar navbar-light navbar-expand-md bg-light sticky-top mb-1">
+                <!-- Include navigation items -->
                 <?php include './include/navbar.php' ?>
                 <div class="collapse navbar-collapse" id="navbar">
                     <div class="navbar-nav">
                         <!-- Pill background to show which is currently active (in this case none)-->
                         <a class="nav-item nav-link text-center text-dark h5 animate__animated animate__fadeInRight" href="search.php">Home</a>
-                        <a class="nav-item nav-link text-center text-dark h5 animate__animated animate__fadeInRight" href="registration.php">Register</a>
                         <a class="nav-item nav-link text-center text-dark h5 animate__animated animate__fadeInRight" href="about.php">About</a>
-                        <?php include 'loggedIn.php' ?>
+                        <!-- Display nav items based on if the user is loggged in or not -->
+                        <?php include './database/loggedIn.php' ?>
                     </div>
                 </div>
             </nav>    
@@ -37,16 +40,18 @@
                     <div id="map" style="height: 80vh; width: 100%;"></div>
                 </div>
                 <div class="col-lg-3 col-10 text-center mx-auto px-2 g-lg-2">
+                <!-- Include database/search_results which generates the results -->
                 <?php  include './database/search_results.php' ?>
                 </div>
             </div>
             </div>
         </div>
     </div>
-    <?php include './include/footer.php'; include 'login_form.php'; ?>
+    <!-- Include footers and a login form (as modal) -->
+    <?php include './include/footer.php'; include './database/login_form.php'; ?>
     <script type=text/javascript> 
-        // Map function that grabs a PHP array which has coordinates and names and converts it into a javascript object, adds it into the markers array,
-        // before passing the vairbale into initMapMain, which is the main function that sets the parameters for the googleMaps API and is called.
+        // Map function that grabs a PHP array called $markers, which has coordinates and names of the library and converts it into a javascript object using json_encode (create_markers)
+        // That array is then processed, and js objects are created with coordinates and content retrieved from the create_markers array, which is then used by the Google Maps API to generate markers on the search page.
         function ResultMap() {
             const map = new google.maps.Map(document.getElementById("map"), {
             zoom: 1,
@@ -58,8 +63,10 @@
             var bounds  = new google.maps.LatLngBounds();
 
             markers = [];
+            // convert PHP array into js
             var create_markers = <?php echo json_encode($markers) ?>
 
+            // Loop through array and create marker objects
             for (var i = 0; i < create_markers.length; i++) {
                 var rate;
                 if (create_markers[i]['Rating']) {
@@ -67,12 +74,13 @@
                 } else {
                     rate = "Unrated";
                 }
+                // Create marker with latitude and longitude from library database as well as rating.
                 markerToAdd = {coordinates : { lat: parseInt(create_markers[i]['Latitude']), lng: parseInt(create_markers[i]['Longitude']) }}
                 markerToAdd['content'] = '<h5><a href="individual_result.php?Library=' + create_markers[i]['Name'] + '">' + create_markers[i]['Name'] + '</a></h5>' + '<h6>' + rate + '</h6>' +
                 '<p>Latitude: ' + create_markers[i]['Latitude'] + ', Longitude: ' + create_markers[i]['Longitude'] + ' </p>';
                 markers.push(markerToAdd);
             }
-
+            // Extend the bounds of the generated map based on each marker that is added
             markers.forEach((marker)=>{
                 var Marker = new google.maps.Marker({
                     position: marker.coordinates,
@@ -86,6 +94,7 @@
                     infoWindow.open(map, Marker);
                 })
             }) 
+            // Auto zoom and pan the map to display all the markers
             map.fitBounds(bounds);
         }
 </script>

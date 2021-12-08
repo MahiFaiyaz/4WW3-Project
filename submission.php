@@ -1,3 +1,4 @@
+<!-- Start Session -->
 <?php session_start() ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -5,6 +6,7 @@
     <meta name="description" content="Submit new library page.">
     <meta property="og:title" content="Library Submission">
     <meta property="og:url" content="http://18.119.43.170/home/submission.php" />
+    <!-- Include headers -->
     <?php include './include/header.php' ?>
     <title>Library Submission</title>
 </head>
@@ -14,14 +16,15 @@
         <div id="main">
             <!-- Adds navigation bar, with a toggle button when collapsed below a medium size screen (720px) -->
             <nav class="navbar navbar-light navbar-expand-md bg-light sticky-top mb-1">
+                <!-- Include navigation items -->
                 <?php include './include/navbar.php' ?>
                 <div class="collapse navbar-collapse" id="navbar">
                     <div class="navbar-nav">
                         <!-- Pill background to show which is currently active -->
                         <a class="nav-item nav-link text-center text-dark h5 animate__animated animate__fadeInRight" href="search.php">Home</a>
-                        <a class="nav-item nav-link text-center text-dark h5 animate__animated animate__fadeInRight" href="registration.php">Register</a>
                         <a class="nav-item nav-link text-center text-dark h5 animate__animated animate__fadeInRight" href="about.php">About</a>
-                        <?php include 'loggedIn.php' ?>
+                        <!-- Display nav items based on if the user is loggged in or not -->
+                        <?php include './database/loggedIn.php' ?>
                     </div>
                 </div>
             </nav>       
@@ -29,7 +32,7 @@
             <h1 class="display-2 text-dark bg-light text-center col-12 col-md-6 mx-auto rounded-pill pb-3">
                 Submit library
             </h1>
-            <!-- Container with a form within for all library information. Also has a input for image and video -->
+            <!-- Container with a form within for all library information. Also has a input for image and video, submits to database/add_library -->
             <div class="container-fluid bg-light p-3 rounded col-12 col-md-6 mx-auto">
                 <form action="./database/add_library.php" method="POST" enctype="multipart/form-data">
                     <label for="libraryName" class="form-label">Library Name</label>
@@ -58,6 +61,7 @@
             </div>
         </div>
     </div>
-    <?php include './include/footer.php'; include 'login_form.php'; ?>
+    <!-- Include footers and a login form (as modal) -->
+    <?php include './include/footer.php'; include './database/login_form.php'; ?>
 </body>
 </html>

@@ -1,6 +1,9 @@
+-- Create LibraryFinder database
+
 CREATE DATABASE LibraryFinder;
 USE LibraryFinder;
 
+-- Create table Users that has ID auto incremented, name, gender, email, password, date of birth, and timestamp of created and updated date
 CREATE TABLE `Users` ( 
     `Id` INT NOT NULL AUTO_INCREMENT , 
     `Name` VARCHAR(255) NOT NULL , 
@@ -13,7 +16,8 @@ CREATE TABLE `Users` (
     PRIMARY KEY (`Id`)
     );
 
-
+-- Create table Library that has ID auto incremented, name, latitude, longitude, description, image file path, video file path,
+-- rating, userID that references the users table, and timestamp of created and updated date
 CREATE TABLE `Library` ( 
     `Id` INT NOT NULL AUTO_INCREMENT , 
     `Name` VARCHAR(255) NOT NULL , 
@@ -30,6 +34,8 @@ CREATE TABLE `Library` (
     FOREIGN KEY (`UserId`) REFERENCES Users(`Id`)
     );
 
+-- Create table Reviews that has ID auto incremented, LibraryId that references an Id from the Library table, and a UserId that references an Id from the users table,
+-- Reivews, Rating, and timestamp of created and updated date
 CREATE TABLE `Reviews` ( 
     `Id` INT NOT NULL AUTO_INCREMENT , 
     `LibraryId` INT NOT NULL, 

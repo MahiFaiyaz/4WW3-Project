@@ -1,3 +1,4 @@
+<!-- Start Session and fetch library information of the current page -->
 <?php session_start();
     require './database/config.php';
     $dsn = "mysql:host=$servername;dbname=$dbname;charset=UTF8";
@@ -14,13 +15,14 @@
                 echo "Connection failed: " . $e->getMessage();
             }
             $pd0=null;
-        }
+        } else {echo "Library doesn't exist";}
     } else {echo "Invalid Method";}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Include headers -->
     <?php include './include/header.php' ?>
     <title><?=$library['Name'] ?></title>
 </head>
@@ -30,14 +32,15 @@
         <div id="main">
             <!-- Adds navigation bar, with a toggle button when collapsed below a medium size screen (720px) -->
             <nav class="navbar navbar-light navbar-expand-md bg-light sticky-top mb-1">
+                <!-- Include navigation items -->
                 <?php include './include/navbar.php' ?>
                 <div class="collapse navbar-collapse" id="navbar">
                     <div class="navbar-nav">
                         <!-- Pill background to show which is currently active (in this case none)-->
                         <a class="nav-item nav-link text-center text-dark h5 animate__animated animate__fadeInRight" href="search.php">Home</a>
-                        <a class="nav-item nav-link text-center text-dark h5 animate__animated animate__fadeInRight" href="registration.php">Register</a>
                         <a class="nav-item nav-link text-center text-dark h5 animate__animated animate__fadeInRight" href="about.php">About</a>
-                        <?php include 'loggedIn.php' ?>
+                        <!-- Display nav items based on if the user is loggged in or not -->
+                        <?php include './database/loggedIn.php' ?>
                     </div>
                 </div>
             </nav>    
@@ -45,22 +48,24 @@
             <h1 class="display-6 text-dark bg-light text-center rounded-bottom pb-3">
                 <?=$library['Name'] ?>
             </h1>
-            <!-- Div with rating and address -->
             <div class="row" style="margin: auto">
                 <div class="col-lg-4 col-12 text-center mt-2 px-2 px-lg-3">
                     <div id="map" style="height: 50vh; width: 100%;"></div>
                     <h2 class="bg-dark text-light text-center rounded-pill mt-2">
                     <?php 
+                    // If library has rating, show rating, otherwise unrated
                     if ($library['Rating']) {
                         echo $library['Rating'] . " stars";
                     } else {
                         echo "Unrated";
                     }
                     ?>
+                    <!-- Show latitude and longitude -->
                     </h2>
                     <p class="bg-dark text-light text-center rounded-pill ">Latitude: <?=$library['Latitude']?>, Longitude: <?=$library['Longitude'] ?></p>
                 </div>
                 <?php 
+                // Grab default library image if no image is set, otherwise grab image based on imageFilePath in the library database
                     if ((isset($library['ImageFilePath'])) && !empty($library['ImageFilePath'])){
                         $imgSource = 'https://library-finder-library-images.s3.us-east-2.amazonaws.com/' . $library['ImageFilePath']; 
                     }
@@ -68,6 +73,7 @@
                         $imgSource = 'https://library-finder-library-images.s3.us-east-2.amazonaws.com/images/Library.jpg';
                     }
                 ?>
+                <!-- display image -->
                 <img src="<?=$imgSource?>" class="img-fluid mt-2 px-2 col-lg-8 col-12 gx-0 rounded" alt="Terryberry library">
             </div>
             <!-- Review title -->
@@ -76,6 +82,9 @@
             </h2>
             <!-- Reviews -->
             <?php 
+            // Use library name of the current library page to query Library database for the Library ID
+            // Use library ID to query reviews that have that libraryID foreign key
+            // Generate the reviews from the database if reviews found.
                 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     if ((isset($_GET['Library'])) && !empty($_GET['Library'])) {
 
@@ -102,12 +111,20 @@
                                         <div class="card-body col-6 mx-auto w-0 text-start w-100">
                                             <h3><?=$reviewerName?></h3>
                                             <h4><?=$row['Rating'] ?> stars</h4>
-                                            <p><?=$row['Review']?>
-                                            </p>
+                                            <p><?=$row['Review']?></p>
                                         </div>
                                     </div>
                                 <?php
                                 }
+                            } else {
+                                // If no reviews found, then generate card saying no reviews posted.
+                                ?>
+                                <div class="card text-white bg-secondary mt-2 col-md-8 col-12 mx-auto bg-gradient mb-2">
+                                    <div class="card-body col-6 mx-auto w-0 text-start w-100">
+                                        <h3 style="text-align:center">No reviews posted</h3>
+                                    </div>
+                                </div>
+                            <?php
                             }
                         } 
                         catch (PDOException $e) {
@@ -116,6 +133,7 @@
                         $pd0=null;
                     }
                 } else {echo "Invalid Method";}
+                // If session is set, generate a new form that lets users input their own review.
                 if (isset($_SESSION['Email']) && !empty($_SESSION['Email'])) { ?>
                     <div class="card text-white bg-secondary mt-2 mb-5 col-md-8 col-12 mx-auto bg-gradient" >
                     <div class="card-body col-6 mx-auto w-0 text-start w-100">
@@ -140,9 +158,11 @@
                 }?>
         </div>
     </div>
-    <?php include './include/footer.php'; include 'login_form.php'; ?>
+    <!-- Include footers and a login form (as modal) -->
+    <?php include './include/footer.php'; include './database/login_form.php'; ?>
+    <!-- Script to generate a map and map markers based on latitude, longitude, and rating information in the library database -->
     <script type=text/javascript> 
-        //Map function for individual sample page, initializes center and zoom and creates a markers before calling initMapMain
+        //Map function for individual library, centered around the latitude and longitude.
         function LibraryMap() {
             const map = new google.maps.Map(document.getElementById("map"), {
             zoom: 1,
@@ -153,6 +173,7 @@
             map.setOptions({styles: styles["hide"]});
             var bounds  = new google.maps.LatLngBounds();
 
+            // Adds information for library markers
             const markers = [
                 {
                     coordinates: { lat: <?=$library['Latitude']?>, lng: <?=$library['Longitude']?> },

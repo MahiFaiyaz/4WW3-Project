@@ -1,4 +1,5 @@
 <?php
+    // Information for setting up s3 client (accessKey and secretAccessKey are stored in the keyInfo folder (not submitted))
     require '../vendor/autoload.php';
     require 'keyInfo.php';
 	

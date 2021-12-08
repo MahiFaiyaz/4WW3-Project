@@ -1,3 +1,4 @@
+<!-- Common navbar information (such as logo) -->
 <a class="navbar-brand" href='search.php'>
     <img src="images/logo.png" class="animate__animated animate__rotateIn" alt="logo" width='50' height='50'>
 </a>

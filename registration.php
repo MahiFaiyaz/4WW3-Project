@@ -1,19 +1,13 @@
-<?php session_start() ?>
-
+<!-- Do not start a session, since user does not need to be logged in -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta name="description" content="Registration page.">
     <meta property="og:title" content="Registration">
     <meta property="og:url" content="http://18.119.43.170/home/registration.php" />
+    <!-- Include headers -->
     <?php include './include/header.php' ?>
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script>
-        $(document).ready(function() {
-
-        });
-    </script>
-    <title>Register</title> -->
+    <title>Register</title>
 </head>
 <body class="main">
     <!-- Container and main div ids are for properly positioning footer at the bottom -->
@@ -21,14 +15,15 @@
         <div id="main">
             <!-- Adds navigation bar, with a toggle button when collapsed below a medium size screen (720px) -->
             <nav class="navbar navbar-light navbar-expand-md bg-light sticky-top mb-1">
+                <!-- Include navigation items -->
                 <?php include './include/navbar.php' ?>
                 <div class="collapse navbar-collapse" id="navbar">
                     <div class="navbar-nav">
                         <!-- Pill background to show which is currently active -->
                         <a class="nav-item nav-link text-center text-dark h5 animate__animated animate__fadeInRight" href="search.php">Home</a>
-                        <a class="nav-item nav-link text-center text-light h5 rounded-pill bg-dark animate__animated animate__fadeInRight" href="registration.php">Register</a>
                         <a class="nav-item nav-link text-center text-dark h5 animate__animated animate__fadeInRight" href="about.php">About</a>
-                        <?php include 'loggedIn.php' ?>
+                        <!-- Display nav items based on if the user is loggged in or not -->
+                        <?php include './database/loggedIn.php' ?>
                     </div>
                 </div>
             </nav>       
@@ -36,7 +31,7 @@
             <h1 class="display-2 text-dark bg-light text-center col-12 col-md-6 mx-auto rounded-pill pb-3">
                 Register
             </h1>
-            <!-- Creates a div to position properly and a form within (no action yet) -->
+            <!-- Creates a div to position properly and a form within that submits to database/create_user -->
             <div class="container-fluid bg-light p-3 rounded col-12 col-md-6 mx-auto">
                 <form action="./database/create_user.php" method="POST" id="register" onsubmit="return validate(this)">
                     <label for="firstName" class="form-label">First Name</label>
@@ -70,7 +65,7 @@
                     <input type="password" id="userPassword" name="userPassword" class="form-control mb-3" placeholder="Password"/>
                     
                     <label for="userBday" class="form-label">Date of Birth</label>
-                    <input type="date" id="userBday" name="userBday" class="form-control mb-3"/>
+                    <input type="date" id="userBday" name="userBday" class="form-control mb-3" max="<?php echo date('Y-m-d', strtotime("yesterday"));?>"/>
                     
                     <!-- Checkbox -->
                     <div class="form-check">
@@ -84,6 +79,7 @@
             </div>
         </div>
     </div>
-    <?php include './include/footer.php'; include 'login_form.php'; ?>
+    <!-- Include footers and a login form (as modal) -->
+    <?php include './include/footer.php'; include './database/login_form.php'; ?>
 </body>
 </html>

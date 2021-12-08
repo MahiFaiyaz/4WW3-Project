@@ -1,16 +1,22 @@
 <?php
+    // get database informatin
     require 'config.php';
     $dsn = "mysql:host=$servername;dbname=$dbname;charset=UTF8";
     $markers = array();
 
+    // If a search request and rating is passed
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         if ((isset($_GET['search'])) && !empty($_GET['search'])) {
             if ((isset($_GET['rating'])) && !empty($_GET['rating'])) {
+                // If variable is passed with comma, then assume it is latitude and longitude
                 $coords = explode(',', $_GET['search']);
                 if (count($coords)>1) {
+                    // If either of the passed variables are not numeric, then show alert and refresh page
                     if (!is_numeric($coords[0]) || !is_numeric($coords[1])) {
                         echo "<script>alert('No results Found');document.location='search.php'</script>";
+                        exit();
                     } 
+                    // Otherwise, make a SQL query based on latitude and longitude +/- 5 from the values given, as well as using the rating.
                     try {
                         $pdo = new PDO($dsn, $username, $password);
                         $stmt = $pdo->prepare("SELECT * FROM Library WHERE Latitude BETWEEN ? AND ? AND Longitude BETWEEN ? AND ? AND Rating = ?");
@@ -26,39 +32,27 @@
                         $stmt->execute();
                         $resultsCount = $stmt->rowCount();
                         if ($resultsCount > 0) {
-                            while ($row = $stmt->fetch()) {
-                                $marker = Array('Name'=>$row['Name'], 'Latitude'=>$row['Latitude'], 'Longitude'=>$row['Longitude'], 'Rating'=>$row['Rating']);
-                                $markers[] = $marker;
-                                if ((isset($row['ImageFilePath'])) && !empty($row['ImageFilePath'])){
-                                    $imgSource = 'https://library-finder-library-images.s3.us-east-2.amazonaws.com/' . $row['ImageFilePath']; 
-                                }
-                                else {
-                                    $imgSource = 'https://library-finder-library-images.s3.us-east-2.amazonaws.com/images/Library.jpg';
-                                }
-                                ?>
-                                <a class="card text-white bg-dark my-2" href="individual_result.php?Library=<?= $row['Name']?>">
-                                    <img class="card-img-top" src="<?=$imgSource?>" alt="<?=$row['Name'] ?>">
-                                    <div class="card-body">
-                                        <h5><?=$row['Name'] ?></h5>
-                                        <h6><?php 
-                                        if ($row['Rating']) {
-                                            echo $row['Rating'] . " stars";
-                                        } else {
-                                            echo "Unrated";
-                                        }
-                                        ?></h6>
-                                        <p class="card-text">Latitude: <?=$row['Latitude']?>, Longitude: <?=$row['Longitude']?></p>
-                                    </div>
-                                </a>
-                                <?php 
-                            }
-                        }  else {echo "<script>alert('No results Found');document.location='search.php'</script>";}
+                            // If results found then include generate_search
+                            include 'generate_search.php';
+                        }  else {
+                            // Display card saying no libraries were found
+                            ?>
+                            <a class="card text-white bg-dark my-2">
+                            <!-- <img class="card-img-top" src="<?=$imgSource?>" alt="<?=$row['Name'] ?>"> -->
+                            <div class="card-body">
+                                <h5>No library Found</h5>
+                            </div>
+                            </a>
+                        <?php
+                        }
                     } catch (PDOException $e) {
                         echo "Connection failed: " . $e->getMessage();
                     }
                     $pdo = null;
                 } else {
+                    // If search is not given with comma, assumee its a search by name and arting
                     try {
+                        // Make query to library table based on the Name and Rating given
                         $pdo = new PDO($dsn, $username, $password);
                         $stmt = $pdo->prepare("SELECT * FROM Library WHERE `Name` LIKE ? AND Rating = ?");
                         $search = '%' . $_GET['search'] . '%';
@@ -67,44 +61,34 @@
                         $stmt->execute();
                         $resultsCount = $stmt->rowCount();
                         if ($resultsCount > 0) {
-                            while ($row = $stmt->fetch()) {
-                                $marker = Array('Name'=>$row['Name'], 'Latitude'=>$row['Latitude'], 'Longitude'=>$row['Longitude'], 'Rating'=>$row['Rating']);
-                                $markers[] = $marker;
-                                if ((isset($row['ImageFilePath'])) && !empty($row['ImageFilePath'])){
-                                    $imgSource = 'https://library-finder-library-images.s3.us-east-2.amazonaws.com/' . $row['ImageFilePath']; 
-                                }
-                                else {
-                                    $imgSource = 'https://library-finder-library-images.s3.us-east-2.amazonaws.com/images/Library.jpg';
-                                }
-                                ?>
-                                <a class="card text-white bg-dark my-2" href="individual_result.php?Library=<?= $row['Name']?>">
-                                    <img class="card-img-top" src="<?=$imgSource?>" alt="<?=$row['Name'] ?>">
-                                    <div class="card-body">
-                                        <h5><?=$row['Name'] ?></h5>
-                                        <h6>                                    <?php 
-                                        if ($row['Rating']) {
-                                            echo $row['Rating'] . " stars";
-                                        } else {
-                                            echo "Unrated";
-                                        }
-                                        ?></h6>
-                                        <p class="card-text">Latitude: <?=$row['Latitude']?>, Longitude: <?=$row['Longitude']?></p>
-                                    </div>
-                                </a>
-                                <?php 
-                            }
-                        }  else {echo "<script>alert('No results Found');document.location='search.php'</script>";}
+                            // If results found then include generate_search
+                            include 'generate_search.php';
+                        }  else {
+                            // Display card saying no libraries were found
+                            ?>
+                            <a class="card text-white bg-dark my-2">
+                            <!-- <img class="card-img-top" src="<?=$imgSource?>" alt="<?=$row['Name'] ?>"> -->
+                            <div class="card-body">
+                                <h5>No library Found</h5>
+                            </div>
+                            </a>
+                        <?php
+                        }
                     } catch (PDOException $e) {
                         echo "Connection failed: " . $e->getMessage();
                     }
                     $pdo = null;
                 }
             } else {
+                // If search doesn't include rating
                 $coords = explode(',', $_GET['search']);
+                // Check if search has comma (if so then assume its a search by latitude and longitude)
                 if (count($coords)>1) {
+                    // If either of the passed variables are not numeric, then show alert and refresh page
                     if (!is_numeric($coords[0]) || !is_numeric($coords[1])) {
                         echo "<script>alert('No results Found');document.location='search.php'</script>";
                     } 
+                    // Otherwise, make a SQL query based on latitude and longitude +/- 5 from the values given.
                     try {
                         $pdo = new PDO($dsn, $username, $password);
                         $stmt = $pdo->prepare("SELECT * FROM Library WHERE Latitude BETWEEN ? AND ? AND Longitude BETWEEN ? AND ?");
@@ -119,39 +103,27 @@
                         $stmt->execute();
                         $resultsCount = $stmt->rowCount();
                         if ($resultsCount > 0) {
-                            while ($row = $stmt->fetch()) {
-                                $marker = Array('Name'=>$row['Name'], 'Latitude'=>$row['Latitude'], 'Longitude'=>$row['Longitude'], 'Rating'=>$row['Rating']);
-                                $markers[] = $marker;
-                                if ((isset($row['ImageFilePath'])) && !empty($row['ImageFilePath'])){
-                                    $imgSource = 'https://library-finder-library-images.s3.us-east-2.amazonaws.com/' . $row['ImageFilePath']; 
-                                }
-                                else {
-                                    $imgSource = 'https://library-finder-library-images.s3.us-east-2.amazonaws.com/images/Library.jpg';
-                                }
-                                ?>
-                                <a class="card text-white bg-dark my-2" href="individual_result.php?Library=<?= $row['Name']?>">
-                                    <img class="card-img-top" src="<?=$imgSource?>" alt="<?=$row['Name'] ?>">
-                                    <div class="card-body">
-                                        <h5><?=$row['Name'] ?></h5>
-                                        <h6>                                    <?php 
-                                        if ($row['Rating']) {
-                                            echo $row['Rating'] . " stars";
-                                        } else {
-                                            echo "Unrated";
-                                        }
-                                        ?></h6>
-                                        <p class="card-text">Latitude: <?=$row['Latitude']?>, Longitude: <?=$row['Longitude']?></p>
-                                    </div>
-                                </a>
-                                <?php 
-                            }
-                        }  else {echo "<script>alert('No results Found');document.location='search.php'</script>";}
+                            // If results found then include generate_search
+                            include 'generate_search.php';
+                        }  else {
+                            // Display card saying no libraries were found
+                            ?>
+                            <a class="card text-white bg-dark my-2">
+                            <!-- <img class="card-img-top" src="<?=$imgSource?>" alt="<?=$row['Name'] ?>"> -->
+                            <div class="card-body">
+                                <h5>No library Found</h5>
+                            </div>
+                            </a>
+                        <?php
+                        }
                     } catch (PDOException $e) {
                         echo "Connection failed: " . $e->getMessage();
                     }
                     $pdo = null;
                 } else {
+                    // If search is not using latitude and longitude
                     try {
+                        // Make query to library table based on the Name given
                         $pdo = new PDO($dsn, $username, $password);
                         $stmt = $pdo->prepare("SELECT * FROM Library WHERE `Name` LIKE ?");
                         $search = '%' . $_GET['search'] . '%';
@@ -159,34 +131,18 @@
                         $stmt->execute();
                         $resultsCount = $stmt->rowCount();
                         if ($resultsCount > 0) {
-                            while ($row = $stmt->fetch()) {
-                                $marker = Array('Name'=>$row['Name'], 'Latitude'=>$row['Latitude'], 'Longitude'=>$row['Longitude'], 'Rating'=>$row['Rating']);
-                                $markers[] = $marker;
-                                if ((isset($row['ImageFilePath'])) && !empty($row['ImageFilePath'])){
-                                    $imgSource = 'https://library-finder-library-images.s3.us-east-2.amazonaws.com/' . $row['ImageFilePath']; 
-                                }
-                                else {
-                                    $imgSource = 'https://library-finder-library-images.s3.us-east-2.amazonaws.com/images/Library.jpg';
-                                }
-                                ?>
-                                <a class="card text-white bg-dark my-2" href="individual_result.php?Library=<?= $row['Name']?>">
-                                    <img class="card-img-top" src="<?=$imgSource?>" alt="<?=$row['Name'] ?>">
-                                    <div class="card-body">
-                                        <h5><?=$row['Name'] ?></h5>
-                                        <h6>                                    <?php 
-                                        if ($row['Rating']) {
-                                            echo $row['Rating'] . " stars";
-                                        } else {
-                                            echo "Unrated";
-                                        }
-                                        ?></h6>
-                                        <p class="card-text">Latitude: <?=$row['Latitude']?>, Longitude: <?=$row['Longitude']?></p>
-                                    </div>
-                                </a>
-                                <?php 
-                            }
-                        } else {
-                            echo "<script>alert('No results Found');document.location='search.php'</script>";
+                            // If results found then include generate_search
+                            include 'generate_search.php';
+                        }  else {
+                            // Display card saying no libraries were found
+                            ?>
+                            <a class="card text-white bg-dark my-2">
+                            <!-- <img class="card-img-top" src="<?=$imgSource?>" alt="<?=$row['Name'] ?>"> -->
+                            <div class="card-body">
+                                <h5>No library Found</h5>
+                            </div>
+                            </a>
+                        <?php
                         }
                     } catch (PDOException $e) {
                         echo "Connection failed: " . $e->getMessage();
@@ -195,84 +151,53 @@
                 }
             }
         } else {
+            // If there is no search term, but only a rating
             if ((isset($_GET['rating'])) && !empty($_GET['rating'])) {
                 try {
+                    // Make SQl query to the Library database based on the rating given
                     $pdo = new PDO($dsn, $username, $password);
                     $stmt = $pdo->prepare("SELECT * FROM Library WHERE Rating = ?");
                     $stmt->bindParam(1, $_GET['rating']);
                     $stmt->execute();
                     $resultsCount = $stmt->rowCount();
                     if ($resultsCount > 0) {
-                        while ($row = $stmt->fetch()) {
-                            $marker = Array('Name'=>$row['Name'], 'Latitude'=>$row['Latitude'], 'Longitude'=>$row['Longitude'], 'Rating'=>$row['Rating']);
-                            $markers[] = $marker;
-                            if ((isset($row['ImageFilePath'])) && !empty($row['ImageFilePath'])){
-                                $imgSource = 'https://library-finder-library-images.s3.us-east-2.amazonaws.com/' . $row['ImageFilePath']; 
-                            }
-                            else {
-                                $imgSource = 'https://library-finder-library-images.s3.us-east-2.amazonaws.com/images/Library.jpg';
-                            }
-                            ?>
-                            <a class="card text-white bg-dark my-2" href="individual_result.php?Library=<?= $row['Name']?>">
-                                <img class="card-img-top" src="<?=$imgSource?>" alt="<?=$row['Name'] ?>">
-                                <div class="card-body">
-                                    <h5><?=$row['Name'] ?></h5>
-                                    <h6>                                    <?php 
-                                    if ($row['Rating']) {
-                                        echo $row['Rating'] . " stars";
-                                    } else {
-                                        echo "Unrated";
-                                    }
-                                    ?></h6>
-                                    <p class="card-text">Latitude: <?=$row['Latitude']?>, Longitude: <?=$row['Longitude']?></p>
-                                </div>
-                            </a>
-                            <?php 
-                        }
-                    } else {
-                        echo "<script>alert('No results Found');document.location='search.php'</script>";
+                        // If results found then include generate_search
+                        include 'generate_search.php';
+                    }  else {
+                        // Display card saying no libraries were found
+                        ?>
+                        <a class="card text-white bg-dark my-2">
+                        <!-- <img class="card-img-top" src="<?=$imgSource?>" alt="<?=$row['Name'] ?>"> -->
+                        <div class="card-body">
+                            <h5>No library Found</h5>
+                        </div>
+                        </a>
+                    <?php
                     }
                 } catch (PDOException $e) {
                     echo "Connection failed: " . $e->getMessage();
                 }
                 $pdo = null;
             } else {
+                // If no search or rating given, then query the database for all items in Library
                 try {
                     $pdo = new PDO($dsn, $username, $password);
                     $stmt = $pdo->prepare("SELECT * FROM Library");
                     $stmt->execute();
                     $resultsCount = $stmt->rowCount();
                     if ($resultsCount > 0) {
-                        while ($row = $stmt->fetch()) {
-                            $marker = Array('Name'=>$row['Name'], 'Latitude'=>$row['Latitude'], 'Longitude'=>$row['Longitude'], 'Rating'=>$row['Rating']);
-                            $markers[] = $marker;
-                            if ((isset($row['ImageFilePath'])) && !empty($row['ImageFilePath'])){
-                                $imgSource = 'https://library-finder-library-images.s3.us-east-2.amazonaws.com/' . $row['ImageFilePath']; 
-                            }
-                            else {
-                                $imgSource = 'https://library-finder-library-images.s3.us-east-2.amazonaws.com/images/Library.jpg';
-                            }
-                            ?>
-                            <a class="card text-white bg-dark my-2" href="individual_result.php?Library=<?= $row['Name']?>">
-                                <img class="card-img-top" src="<?=$imgSource?>" alt="<?=$row['Name'] ?>">
-                                <div class="card-body">
-                                    <h5><?=$row['Name'] ?></h5>
-                                    <h6>
-                                    <?php 
-                                    if ($row['Rating']) {
-                                        echo $row['Rating'] . " stars";
-                                    } else {
-                                        echo "Unrated";
-                                    }
-                                    ?>
-                                    </h6>
-                                    <p class="card-text">Latitude: <?=$row['Latitude']?>, Longitude: <?=$row['Longitude']?></p>
-                                </div>
-                            </a>
-                            <?php 
-                        }
-                    } else {
-                        echo "<script>alert('No results Found');document.location='search.php'</script>";
+                        // If results found then include generate_search
+                        include 'generate_search.php';
+                    }  else {
+                        // Display card saying no libraries were found
+                        ?>
+                        <a class="card text-white bg-dark my-2">
+                        <!-- <img class="card-img-top" src="<?=$imgSource?>" alt="<?=$row['Name'] ?>"> -->
+                        <div class="card-body">
+                            <h5>No library Found</h5>
+                        </div>
+                        </a>
+                    <?php
                     }
                 } catch (PDOException $e) {
                     echo "Connection failed: " . $e->getMessage();
