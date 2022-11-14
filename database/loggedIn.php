@@ -57,7 +57,7 @@
         }
         ?>
         <!-- Show a navigation link for Login (which brings up a Modal form) -->
-        <a class="nav-item nav-link text-center text-primary rounded-pill h5 animate__animated animate__fadeInRight" data-bs-toggle="modal" data-bs-target="#LoginModal" href="#">Login</a>'
+        <a class="nav-item nav-link text-center text-primary rounded-pill h5 animate__animated animate__fadeInRight" data-bs-toggle="modal" data-bs-target="#LoginModal" href="#">Login</a>
         <?php
     }
 ?>
