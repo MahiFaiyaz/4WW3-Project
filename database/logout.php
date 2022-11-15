@@ -5,7 +5,7 @@
     session_start();
     $currentURL = $_POST['currentURL'];
     session_destroy();
-    if ($currentURL == '/home/submission.php') {
-        header('Location: ../search.php');
+    if ($currentURL == '/submission.php') {
+        header('Location: ../index.php');
     } else { header('Location: ' . $currentURL); }
 ?>

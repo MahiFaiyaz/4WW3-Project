@@ -47,7 +47,7 @@
                         // and redirect to the home page.
                         session_start();
                         $_SESSION['Email'] = $userEmail;
-                        header('Location: '. '../search.php');
+                        header('Location: '. '../index.php');
                     }
                 }                 
             } catch (PDOException $e) {

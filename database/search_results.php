@@ -13,7 +13,7 @@
                 if (count($coords)>1) {
                     // If either of the passed variables are not numeric, then show alert and refresh page
                     if (!is_numeric($coords[0]) || !is_numeric($coords[1])) {
-                        echo "<script>alert('No results Found');document.location='search.php'</script>";
+                        echo "<script>alert('No results Found');document.location='index.php'</script>";
                         exit();
                     } 
                     // Otherwise, make a SQL query based on latitude and longitude +/- 5 from the values given, as well as using the rating.
@@ -86,7 +86,7 @@
                 if (count($coords)>1) {
                     // If either of the passed variables are not numeric, then show alert and refresh page
                     if (!is_numeric($coords[0]) || !is_numeric($coords[1])) {
-                        echo "<script>alert('No results Found');document.location='search.php'</script>";
+                        echo "<script>alert('No results Found');document.location='index.php'</script>";
                     } 
                     // Otherwise, make a SQL query based on latitude and longitude +/- 5 from the values given.
                     try {
