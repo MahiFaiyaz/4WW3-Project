@@ -49,7 +49,7 @@
                     } 
                     // If the email is invalid show alert and refresh page
                 } else {echo "<script type='text/javascript'>                    
-                      swal({
+                      swal.fire({
                         title: 'Error',
                         text: 'Email not found!',
                         icon: 'error'
