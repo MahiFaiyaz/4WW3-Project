@@ -23,7 +23,7 @@
         // set pdo to null
         $pdo=null;
         // if user is on the submission then display submission page navigation pill as highlighted
-        if ($_SERVER['PHP_SELF'] == '/home/submission.php'){
+        if ($_SERVER['PHP_SELF'] == '/submission.php'){
             echo '<a class="nav-item nav-link text-center text-light h5 rounded-pill bg-dark animate__animated animate__fadeInRight" href="submission.php">Submit</a>';
         } else {
             // otherwise show the submit navigation pill as unselected
@@ -49,7 +49,7 @@
     // If user is not logged in
     } else {
         // Abd if they are on the registration page, then show the Register navigation pill as selected
-        if ($_SERVER['PHP_SELF'] == '/home/registration.php'){
+        if ($_SERVER['PHP_SELF'] == '/registration.php'){
             echo '<a class="nav-item nav-link text-center text-light h5 rounded-pill bg-dark animate__animated animate__fadeInRight" href="registration.php">Register</a>';
         } else {
             // Otherwise show the Register navigation pill as unselected.

@@ -35,7 +35,7 @@
                             setcookie('Email', null, -1, "/");
                         }
                         // If the user is on the registration page when logging in, then redirects to homepage
-                        if ($currentURL == '/home/registration.php') {
+                        if ($currentURL == '/registration.php') {
                             header('Location: ../index.php');
                         // Otherwise user stays on the current page (just refresh page)
                         } else { header('Location: ' . $currentURL); }
