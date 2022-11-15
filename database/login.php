@@ -1,4 +1,7 @@
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<head>
+  <script src="jquery-3.3.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+</head>
 <?php
     // Start session and include validate form
     session_start();
@@ -45,7 +48,16 @@
                         echo "<script>alert('Incorrect Password');document.location='$currentURL'</script>";
                     } 
                     // If the email is invalid show alert and refresh page
-                } else {echo "<script>Swal.fire({'Error!'});document.location='$currentURL'</script>";}
+                } else {echo '<script type="text/javascript">                    
+                      swal({
+                        title: "Error",
+                        text: "Email not found!"
+                        icon: "error"
+                      })
+                    });
+                    document.location="$currentURL"
+                    </script>
+                    ';}                
             }
             catch (PDOException $e) {
                 echo "Connection failed: " . $e->getMessage();
