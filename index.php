@@ -5,7 +5,7 @@
 <head>
     <meta name="description" content="Search page.">
     <meta property="og:title" content="Library Locator">
-    <meta property="og:url" content="https://librarylocator.mahifaiyaz.ca/search.php" />
+    <meta property="og:url" content="https://librarylocator.mahifaiyaz.ca/index.php" />
     <!-- Include headers -->
     <?php include './include/header.php' ?>
     <title>Library Locator</title>
@@ -21,7 +21,7 @@
                 <div class="collapse navbar-collapse" id="navbar">
                     <div class="navbar-nav">
                         <!-- Pill background to show which is currently active -->
-                        <a class="nav-item nav-link text-center text-light h5 rounded-pill bg-dark animate__animated animate__fadeInRight" href="search.php">Home</a>
+                        <a class="nav-item nav-link text-center text-light h5 rounded-pill bg-dark animate__animated animate__fadeInRight" href="index.php">Home</a>
                         <a class="nav-item nav-link text-center text-dark h5 animate__animated animate__fadeInRight" href="about.php">About</a>
                         <!-- Display nav items based on if the user is loggged in or not -->
                         <?php include './database/loggedIn.php' ?>

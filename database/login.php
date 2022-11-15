@@ -36,7 +36,7 @@
                         }
                         // If the user is on the registration page when logging in, then redirects to homepage
                         if ($currentURL == '/home/registration.php') {
-                            header('Location: ../search.php');
+                            header('Location: ../index.php');
                         // Otherwise user stays on the current page (just refresh page)
                         } else { header('Location: ' . $currentURL); }
                     } else {

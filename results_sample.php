@@ -19,7 +19,7 @@
                 <div class="collapse navbar-collapse" id="navbar">
                     <div class="navbar-nav">
                         <!-- Pill background to show which is currently active (in this case none)-->
-                        <a class="nav-item nav-link text-center text-dark h5 animate__animated animate__fadeInRight" href="search.php">Home</a>
+                        <a class="nav-item nav-link text-center text-dark h5 animate__animated animate__fadeInRight" href="index.php">Home</a>
                         <a class="nav-item nav-link text-center text-dark h5 animate__animated animate__fadeInRight" href="registration.php">Register</a>
                         <a class="nav-item nav-link text-center text-dark h5 animate__animated animate__fadeInRight" href="about.php">About</a>
                         <?php include 'loggedIn.php' ?>
