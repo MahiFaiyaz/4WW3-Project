@@ -47,7 +47,7 @@
                     $stmt->execute();
                     // If that library name has already been used, use a pop up alert and go back to submission screen
                     if ($stmt->rowCount() > 0) {
-                        echo "Swal.fire({'title': 'Error!', 'text': 'Library Name Already Exists.', 'icon': 'error',});document.location='../submission.php";
+                         echo "<script>alert('Library Name Already Exists');document.location='../submission.php'</script>";             
                     } else {
                         // otherwise retrieve user ID using session email
                         $stmt = $pdo->prepare("SELECT * FROM Users Where Email = ?");
