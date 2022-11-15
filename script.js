@@ -200,15 +200,24 @@ function validateLogin(form) {
 //checks that name is filled in, starts with a capital letter, and only contains letters and spaces.
 function validateName(name, text) {
     if (name == "") {
-        window.alert(text + " is required.");
+        window.Swal.fire({
+            'title': 'Error!',
+            'text': text + " is required.",
+            'icon': 'error',});
         return false;
     }
     if (!(/^([A-Z])/.test(name))) {
-        window.alert("Capitalize first letter for " + text);
+        window.Swal.fire({
+            'title': 'Error!',
+            'text': "Capitalize first letter for " + text,
+            'icon': 'error',});
         return false;
     }
     if (!(/^([a-zA-Z ]){1,30}$/.test(name))) {
-        window.alert("Only letters allowed for " + text);
+        window.Swal.fire({
+            'title': 'Error!',
+            'text': "Only letters allowed for " + text,
+            'icon': 'error',});
         return false;
     }
     return true;
@@ -218,7 +227,10 @@ function validateName(name, text) {
 //checks that a gender is selected.
 function validateGender(gender) {
     if (!gender){
-        window.alert("Gender is required.");
+        window.Swal.fire({
+            'title': 'Error!',
+            'text': "Gender is required.",
+            'icon': 'error',});
         return false;    
     }
     return true;
@@ -228,11 +240,17 @@ function validateGender(gender) {
 //checks that email is filled in and follows proper format.
 function validateEmail(email){
     if (email == "") {
-        window.alert("Email is required.");
+        window.Swal.fire({
+            'title': 'Error!',
+            'text': "Email is required.",
+            'icon': 'error',});
         return false;
     }
     if (!(/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,})+$/.test(email))) {
-        window.alert("Invalid Email");
+        window.Swal.fire({
+            'title': 'Error!',
+            'text': "Invalid Email.",
+            'icon': 'error',});
         return false;
     }
     return true;
@@ -242,7 +260,10 @@ function validateEmail(email){
 //checks that a password is given.
 function validatePassword(password) {
     if (password == "") {
-        window.alert("Password is required.");
+        window.Swal.fire({
+            'title': 'Error!',
+            'text': "Password is required.",
+            'icon': 'error',});
         return false;
     }
     return true;
@@ -252,11 +273,17 @@ function validatePassword(password) {
 //checks that a birthdate is given and follows proper format (also limited to 1800s oldest.)
 function validateDate(date){
     if (date == "") {
-        window.alert("Birthdate is required.");
+        window.Swal.fire({
+            'title': 'Error!',
+            'text': "Birthdate is required.",
+            'icon': 'error',});
         return false;
     }
     if (!(/^(18|19|20)\d\d[-](0[1-9]|1[012])[-](0[1-9]|[12][0-9]|3[01])$/.test(date))) {
-        window.alert("Invalid date");
+        window.Swal.fire({
+            'title': 'Error!',
+            'text': "Invalid date.",
+            'icon': 'error',});
         return false;
     }
     return true;
