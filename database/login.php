@@ -45,7 +45,7 @@
                         echo "<script>alert('Incorrect Password');document.location='$currentURL'</script>";
                     } 
                     // If the email is invalid show alert and refresh page
-                } else {echo "<script>Swal.fire({title: 'Error!', text: 'Incorrect Email.', icon: 'error',});document.location='$currentURL'</script>";}
+                } else {echo "<script>Swal.fire({'Error!'});document.location='$currentURL'</script>";}
             }
             catch (PDOException $e) {
                 echo "Connection failed: " . $e->getMessage();
