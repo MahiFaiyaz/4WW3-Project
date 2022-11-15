@@ -51,7 +51,7 @@
                 } else {echo '<script type="text/javascript">                    
                       swal({
                         title: "Error",
-                        text: "Email not found!"
+                        text: "Email not found!",
                         icon: "error"
                       })
                     });
