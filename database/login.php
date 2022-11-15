@@ -48,15 +48,15 @@
                         echo "<script>alert('Incorrect Password');document.location='$currentURL'</script>";
                     } 
                     // If the email is invalid show alert and refresh page
-                } else {echo '<script type="text/javascript">                    
+                } else {echo "<script type='text/javascript'>                    
                       swal({
-                        title: "Error",
-                        text: "Email not found!",
-                        icon: "error"
+                        title: 'Error',
+                        text: 'Email not found!',
+                        icon: 'error'
                       });
-                    document.location="$currentURL"
+                    document.location='$currentURL'
                     </script>
-                    ';}                
+                    ";}                
             }
             catch (PDOException $e) {
                 echo "Connection failed: " . $e->getMessage();
