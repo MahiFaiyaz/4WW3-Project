@@ -2,7 +2,7 @@
 <footer id="footer">
 	<div class="text-center text-light" style="background-color: rgba(0, 0, 0, 0.425); position: relative; height: 48px; margin-top:-48px;clear:both;">
 		© 2021 Copyright:
-		<a class="text-light" href="https://mahifaiyaz.ca/home/search.php">LibraryLocator.com</a>
+		<a class="text-light" href="https://librarylocator.mahifaiyaz.ca/">LibraryLocator.com</a>
 		<div class="p">Author: Mahi Faiyaz</div>
 	</div>
 </footer>

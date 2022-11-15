@@ -5,7 +5,7 @@
 <head>
     <meta name="description" content="Sample results page.">
     <meta property="og:title" content="Sample Results">
-    <meta property="og:url" content="http://18.119.43.170/home/results_sample.php" />
+    <meta property="og:url" content="https://librarylocator.mahifaiyaz.ca/results_sample.php" />
     <?php include './include/header.php' ?>
     <title>Result</title>
 </head>

@@ -4,7 +4,7 @@
 <head>
     <meta name="description" content="Registration page.">
     <meta property="og:title" content="Registration">
-    <meta property="og:url" content="http://18.119.43.170/home/registration.php" />
+    <meta property="og:url" content="https://librarylocator.mahifaiyaz.ca/registration.php" />
     <!-- Include headers -->
     <?php include './include/header.php' ?>
     <title>Register</title>

@@ -5,7 +5,7 @@
 <head>
     <meta name="description" content="Search page.">
     <meta property="og:title" content="Library Locator">
-    <meta property="og:url" content="http://18.119.43.170/home/search.php" />
+    <meta property="og:url" content="https://librarylocator.mahifaiyaz.ca/search.php" />
     <!-- Include headers -->
     <?php include './include/header.php' ?>
     <title>Library Locator</title>

@@ -5,7 +5,7 @@
 <head>
     <meta name="description" content="Submit new library page.">
     <meta property="og:title" content="Library Submission">
-    <meta property="og:url" content="http://18.119.43.170/home/submission.php" />
+    <meta property="og:url" content="https://librarylocator.mahifaiyaz.ca/submission.php" />
     <!-- Include headers -->
     <?php include './include/header.php' ?>
     <title>Library Submission</title>
