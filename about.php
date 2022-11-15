@@ -34,7 +34,7 @@
             </h1>
             <!-- Container with a form within for all library information. Also has a input for image and video -->
             <div class="container-fluid bg-light p-3 rounded col-12 col-md-6 mx-auto text-center">
-                <h2>Best website of all time.</h2>
+                <h2>Simple website to rate and review your favourite libraries!</h2>
             </div>
         </div>
     </div>
