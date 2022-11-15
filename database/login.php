@@ -1,3 +1,4 @@
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <?php
     // Start session and include validate form
     session_start();
